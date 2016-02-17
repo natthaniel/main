@@ -71,6 +71,13 @@ public class TaskPanel extends JPanel {
         taskList.add(dummyPanel, mainGBC);
         add(new JScrollPane(taskList));
         
+        JPanel titlePanel = new JPanel();
+        titlePanel.setLayout(new GridLayout(1, 6));
+        for (int i=0; i<6; i++){
+        	titlePanel.add(new JButton("fuck"));
+        }
+        taskList.add(titlePanel, tasksGBC, 0);
+        
     }
     
     @Override
