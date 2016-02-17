@@ -40,7 +40,7 @@ import java.awt.*;
 
 public class TaskPanel extends JPanel {
 
-	
+	private  String[] titleBarStr = { "task", "location", "start", "end", "tag", "notification" };
     private JPanel taskList;
     private GridBagConstraints mainGBC;
 	private GridBagConstraints tasksGBC;
@@ -73,10 +73,11 @@ public class TaskPanel extends JPanel {
         
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new GridLayout(1, 6));
+        
         for (int i=0; i<6; i++){
-        	titlePanel.add(new JButton("fuck"));
+        	titlePanel.add(new JButton(titleBarStr[i]));
         }
-        taskList.add(titlePanel, tasksGBC, 0);
+        add(titlePanel, BorderLayout.NORTH);
         
     }
     
