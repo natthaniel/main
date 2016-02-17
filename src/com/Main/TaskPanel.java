@@ -48,8 +48,8 @@ public class TaskPanel extends JPanel {
     public TaskPanel() {
         setLayout(new BorderLayout());
 		setSize(new Dimension(500, 400));
-		mainGBCInit();
-		tasksGBCInit(); 
+		mainGBC = mainGBCInit();
+		tasksGBC = tasksGBCInit(); 
         
         taskList = new JPanel(new GridBagLayout()) {
         	@Override
@@ -78,20 +78,22 @@ public class TaskPanel extends JPanel {
     	taskList.add(comp, constraints, index);
     }
     
-    private void mainGBCInit(){
-		mainGBC = new GridBagConstraints();
+    private GridBagConstraints mainGBCInit(){
+    	GridBagConstraints mainGBC = new GridBagConstraints();
         mainGBC.anchor = GridBagConstraints.NORTH;
         mainGBC.gridwidth = GridBagConstraints.REMAINDER;
         mainGBC.weightx = 1;
         mainGBC.weighty = 1; 
+        return mainGBC;
     }
     
 
-	private void tasksGBCInit(){
-		tasksGBC = new GridBagConstraints();		
+	private GridBagConstraints tasksGBCInit(){
+		GridBagConstraints tasksGBC = new GridBagConstraints();		
 		tasksGBC.gridwidth = GridBagConstraints.REMAINDER;
 		tasksGBC.weightx = 1;
 		tasksGBC.fill = GridBagConstraints.HORIZONTAL;
+		return tasksGBC;
 	}
     
     /**

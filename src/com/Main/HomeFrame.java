@@ -29,12 +29,13 @@ public class HomeFrame extends JFrame{
 	private	JPanel mainPanel;
 	private	LogPanel logPanel;
 	private TaskPanel taskList;
+	private JTextField userInputBox;
 
 	// Constructor of main frame
 	public HomeFrame()
 	{		
 		setTitle( "TODO List Application" );
-		setSize( 1000, 500 );
+		setSize( 1200, 500 );
 		setBackground( Color.WHITE );
 
 		mainPanel = new JPanel();
@@ -71,7 +72,7 @@ public class HomeFrame extends JFrame{
 	
 	private JPanel userInputBar(){
     	JPanel panel = new JPanel();
-        JTextField userInputBox = new JTextField(30);
+        userInputBox = new JTextField(30);
         panel.add(userInputBox);
         JButton enterButton = new JButton("Enter");
         panel.add(enterButton);
@@ -99,9 +100,11 @@ public class HomeFrame extends JFrame{
         
     }
     
-    private String commandParser(String userCommand){    	
-    	String command = userCommand.substring(0, userCommand.indexOf(" "));    	
-    	return command;
+    private String commandParser(String userCommand){  
+    	if(userCommand.contains(" "))
+    		return userCommand.substring(0, userCommand.indexOf(" "));    
+    	else 
+    		return userCommand;
     }
     
     
