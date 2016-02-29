@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -26,10 +27,11 @@ import javax.swing.border.LineBorder;
 public class HomeFrame extends JFrame{
 	
 	// Instance attributes used in this example
-	private	JPanel mainPanel;
+	//private	JPanel mainPanel;
 	private	LogPanel logPanel;
 	private TaskPanel taskList;
 	private JTextField userInputBox;
+	private JSplitPane mainPanel;
 
 	// Constructor of main frame
 	public HomeFrame()
@@ -37,16 +39,14 @@ public class HomeFrame extends JFrame{
 		setTitle( "TODO List Application" );
 		setSize( 1200, 500 );
 		setBackground( Color.WHITE );
-
-		mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayout(1, 2));
+ 
+		mainPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		mainPanel.setDividerSize(3);
 		getContentPane().add(mainPanel);
-
 		JScrollPane scrollPanel = new JScrollPane();
 		logPanel = new LogPanel();
 		scrollPanel.setViewportView(logPanel);
-		//mainPanel.add( scrollPanel, BorderLayout.WEST );
-		mainPanel.add(scrollPanel);
+		mainPanel.setLeftComponent(scrollPanel);
 		
 
         JPanel panel = userInputBar();
@@ -58,7 +58,7 @@ public class HomeFrame extends JFrame{
 
 	public void taskListInitialize(){		
 		taskList = new TaskPanel();
-		mainPanel.add( taskList );		
+		mainPanel.setRightComponent(taskList );		
 	}
 	
 	
