@@ -86,7 +86,7 @@ public class HomeFrame extends JFrame{
 				switch (command.toLowerCase()){
 					case "add":
 						Task task = new Task(userCommand);
-						taskList.addTask(task);
+						//x	taskList.addTask(task);
 						logPanel.recordToLog(userCommand);
 			    		userInputBox.setText("");
 						break;

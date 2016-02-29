@@ -32,6 +32,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JViewport;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -43,120 +44,34 @@ import java.awt.*;
 
 public class TaskPanel extends JPanel {
 
-	private  String[] titleBarStr = { "task", "location", "start", "end", "tag", "notification" };
-    private JPanel taskList;
+	Object titleBarStr[] = { "", "task", "location", "start", "end", "tag", "notification" };
+	Object rowData[][] = {};
     private GridBagConstraints mainGBC;
 	private GridBagConstraints tasksGBC;
 
     public TaskPanel() {
         setLayout(new BorderLayout());
-		setSize(new Dimension(500, 400));
-		
-		mainGBC = mainGBCInit();
-		tasksGBC = tasksGBCInit(); 
-        
-        taskList = new JPanel(new GridBagLayout()) {
-        	@Override
-            protected void paintComponent(Graphics g) {
-            	super.paintComponent(g);
-        		try {
-        	        g.drawImage(ImageIO.read(this.getClass().getResource("background.png")), 0, 0, null);
-        		} catch (IOException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		}
-            }
-        };
-        
-        taskList.setSize(100, 200);
-        
-        JPanel dummyPanel = new JPanel();
-        dummyPanel.setBackground(new Color(0, 0, 0, 0));
-        taskList.add(dummyPanel, mainGBC);
-        add(new JScrollPane(taskList), BorderLayout.CENTER);
-        
-        JPanel titlePanel = new JPanel();
-        titlePanel.setLayout(new GridLayout(1, 6));
-        
-        for (int i=0; i<6; i++){
-        	titlePanel.add(new JButton(titleBarStr[i]));
-        	//titlePanel.add(new JSplitPane(JSplitPane.HORIZONTAL_SPLIT));
-        }
-        add(titlePanel, BorderLayout.NORTH);
-        
-        //taskList.setLayout(new BorderLayout());
-        //add(new JPanel(), BorderLayout.WEST);
-		//add(scroll, BorderLayout.NORTH);
-        
+    	JTable table = new JTable(rowData, titleBarStr);
+    	JScrollPane scrollPane = new JScrollPane(table);
+    	table.setShowGrid(false);
+    	table.setOpaque(false);
+    	table.setBackground(new Color(255, 255, 255, 1));
+    	scrollPane.setOpaque(false);
+    	scrollPane.getViewport().setOpaque(false);
+    	
+        add(scrollPane, BorderLayout.CENTER);
+        //setBackground(Color.GRAY);
     }
     
     @Override
-    public void add(Component comp, Object constraints, int index){
-    	taskList.add(comp, constraints, index);
+    protected void paintComponent(Graphics g) {
+    	super.paintComponent(g);
+		try {
+	        g.drawImage(ImageIO.read(this.getClass().getResource("background.png")), 0, 0, null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
-    
-    private GridBagConstraints mainGBCInit(){
-    	GridBagConstraints mainGBC = new GridBagConstraints();
-        mainGBC.anchor = GridBagConstraints.NORTH;
-        mainGBC.gridwidth = GridBagConstraints.REMAINDER;
-        mainGBC.weightx = 1;
-        mainGBC.weighty = 1; 
-        return mainGBC;
-    }
-    
-
-	private GridBagConstraints tasksGBCInit(){
-		GridBagConstraints tasksGBC = new GridBagConstraints();		
-		tasksGBC.gridwidth = GridBagConstraints.REMAINDER;
-		tasksGBC.weightx = 1;
-		tasksGBC.fill = GridBagConstraints.HORIZONTAL;
-		return tasksGBC;
-	}
-    
-    /**
-     * addTask on the list
-     *
-     * @param task    The task object.
-     * @param userInputBox   The user input box.
-     */
-    public void addTask(Task task){
-    	
-    	if (!task.equals("")) {
-	    	JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT)){
-	    		protected void paintComponent(Graphics g)
-	    	    {
-	    	        g.setColor( getBackground() );
-	    	        g.fillRect(0, 0, getWidth(), getHeight());
-	    	        super.paintComponent(g);
-	    	    }
-	    	};
-	    	panel.setOpaque(false);
-	    	panel.setBackground( new Color(255, 0, 0, 20) );
-    		JCheckBox checkBox = taskCheckBoxSetting(task.getTask());                                 
-    		panel.add(checkBox);
-    		
-    		Border border = new LineBorder(Color.GRAY, 1, true);
-    		Border margin = new EmptyBorder(10,10,10,10);
-    		panel.setBorder(new CompoundBorder(margin, border));
-    		
-    		taskList.add(panel, tasksGBC, 0);   
-    		validate();
-    		repaint();
-        
-    	}   
-    }
-    
-    private JCheckBox taskCheckBoxSetting(String textForCheckBox){
-    	JCheckBox checkBox = new JCheckBox(textForCheckBox);
-		checkBox.setOpaque(false);
-		checkBox.setBackground( new Color(255, 255, 255, 20) );
-		checkBox.setForeground(Color.WHITE);
-		
-		return checkBox;
-    }
-    
-
-
-       
-  
 }
+
