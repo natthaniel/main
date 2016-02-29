@@ -20,11 +20,8 @@ public class Parser {
 		case "delete":
 			int deleteRow = Integer.parseInt(parameters);
 			command.setDeleteRow(deleteRow);
+			break;
 
-			break;
-		case "update":
-			
-			break;
 		default:
 		}
 	}
