@@ -5,12 +5,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TextFileSaver {
 
 	File file;
 	String fileName;
+	ArrayList<String> fileData;
 	
 	public TextFileSaver(String category){
 		fileName = category+".txt";

@@ -60,8 +60,6 @@ public class InputBox extends JDialog{
         panel.setBorder(new MatteBorder(0, 0, 0, 0, Color.GRAY));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        //gbc.weightx = 1;
-        //gbc.weighty = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         jPanel.add(panel, gbc);
         
@@ -77,8 +75,6 @@ public class InputBox extends JDialog{
         panel.setBorder(new MatteBorder(0, 0, 0, 0, Color.GRAY));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        //gbc.weightx = 1;
-        //gbc.weighty = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         jPanel.add(panel, gbc);
 	}

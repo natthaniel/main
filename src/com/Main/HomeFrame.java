@@ -82,12 +82,13 @@ public class HomeFrame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String userCommand = userInputBox.getText();
 				String command = commandParser(userCommand);  
+				
 				switch (command.toLowerCase()){
 					case "add":
 						Task task = new Task(userCommand);
 						taskList.addTask(task);
 						logPanel.recordToLog(userCommand);
-						userInputBox.setText("");
+			    		userInputBox.setText("");
 						break;
 					default:
 						

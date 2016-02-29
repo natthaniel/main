@@ -1,20 +1,20 @@
 package com.Main;
 
 public class Task {
-	private String task;
-	private String location;
-	private String start;
-	private String end;
-	private String tag;
-	private String notification;
+	private String taskName = "";
+	private String location = "";
+	private String start = "";
+	private String end = "";
+	private String tag = "";
+	private String notification = "";
 	
 	public Task(String userCommand){
 		//TODO parse command into parameters
-		task = userCommand.substring(0, userCommand.indexOf(" "));
+		taskName = userCommand.substring(0, userCommand.indexOf(" "));
 	}
 
 	public String getTask() {
-		return task;
+		return taskName;
 	}
 
 	public String getLocation() {
@@ -37,8 +37,8 @@ public class Task {
 		return notification;
 	}
 
-	public void setTask(String task) {
-		this.task = task;
+	public void setTask(String taskName) {
+		this.taskName = taskName;
 	}
 
 	public void setLocation(String location) {

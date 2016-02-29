@@ -26,8 +26,11 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -40,7 +43,7 @@ import java.awt.*;
 
 public class TaskPanel extends JPanel {
 
-	
+	private  String[] titleBarStr = { "task", "location", "start", "end", "tag", "notification" };
     private JPanel taskList;
     private GridBagConstraints mainGBC;
 	private GridBagConstraints tasksGBC;
@@ -48,6 +51,7 @@ public class TaskPanel extends JPanel {
     public TaskPanel() {
         setLayout(new BorderLayout());
 		setSize(new Dimension(500, 400));
+		
 		mainGBC = mainGBCInit();
 		tasksGBC = tasksGBCInit(); 
         
@@ -69,14 +73,20 @@ public class TaskPanel extends JPanel {
         JPanel dummyPanel = new JPanel();
         dummyPanel.setBackground(new Color(0, 0, 0, 0));
         taskList.add(dummyPanel, mainGBC);
-        add(new JScrollPane(taskList));
+        add(new JScrollPane(taskList), BorderLayout.CENTER);
         
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new GridLayout(1, 6));
+        
         for (int i=0; i<6; i++){
-        	titlePanel.add(new JButton("fuck"));
+        	titlePanel.add(new JButton(titleBarStr[i]));
+        	//titlePanel.add(new JSplitPane(JSplitPane.HORIZONTAL_SPLIT));
         }
-        taskList.add(titlePanel, tasksGBC, 0);
+        add(titlePanel, BorderLayout.NORTH);
+        
+        //taskList.setLayout(new BorderLayout());
+        //add(new JPanel(), BorderLayout.WEST);
+		//add(scroll, BorderLayout.NORTH);
         
     }
     
