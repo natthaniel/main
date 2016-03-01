@@ -21,7 +21,11 @@ public class Parser {
 			int deleteRow = Integer.parseInt(parameters);
 			command.setDeleteRow(deleteRow);
 			break;
-
+		case "view":
+			/*TODO list view or display task details
+			 * 
+			 */
+			break;
 		default:
 		}
 	}

@@ -40,4 +40,8 @@ public class Processor {
 	private void update(){
 		
 	}
+	
+	private void view(){
+		
+	}
 }
