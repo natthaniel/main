@@ -21,7 +21,7 @@ public class LogPanel extends JPanel{
     private GridBagConstraints mainGBC;
 	
 	public LogPanel(){
-		setSize(new Dimension(500, 400));
+		setPreferredSize(new Dimension(600, 300));
 		setBackground(Color.WHITE);
 		setLayout(new GridBagLayout());
 		tasksGBCInit(); 

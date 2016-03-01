@@ -32,10 +32,12 @@ public class HomeFrame extends JFrame{
 	private TaskPanel taskList;
 	private JTextField userInputBox;
 	private JSplitPane mainPanel;
+	private Processor processor;
 
 	// Constructor of main frame
 	public HomeFrame()
 	{		
+		processor = new Processor();
 		setTitle( "TODO List Application" );
 		setSize( 1200, 500 );
 		setBackground( Color.WHITE );
@@ -48,7 +50,7 @@ public class HomeFrame extends JFrame{
 		scrollPanel.setViewportView(logPanel);
 		mainPanel.setLeftComponent(scrollPanel);
 		
-
+		
         JPanel panel = userInputBar();
         add(panel, BorderLayout.SOUTH);
                 
@@ -58,6 +60,7 @@ public class HomeFrame extends JFrame{
 
 	public void taskListInitialize(){		
 		taskList = new TaskPanel();
+		taskList.upDateTaskList(processor);
 		mainPanel.setRightComponent(taskList );		
 	}
 	
@@ -81,33 +84,13 @@ public class HomeFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String userCommand = userInputBox.getText();
-				String command = commandParser(userCommand);  
-				
-				switch (command.toLowerCase()){
-					case "add":
-						Task task = new Task(userCommand);
-						//x	taskList.addTask(task);
-						logPanel.recordToLog(userCommand);
-			    		userInputBox.setText("");
-						break;
-					default:
-						
-				}
+				processor.processCommand(userCommand); 
+				taskList.upDateTaskList(processor);
+				logPanel.recordToLog(userCommand);
 			}			
     	});  
         
         return panel;
         
-    }
-    
-    private String commandParser(String userCommand){  
-    	if(userCommand.contains(" "))
-    		return userCommand.substring(0, userCommand.indexOf(" "));    
-    	else 
-    		return userCommand;
-    }
-    
-    
-	
-	
+    }   	
 }

@@ -42,7 +42,7 @@ public class TextFileSaver {
 
 	
 	public TextFileSaver(){
-		String temp;
+		fileData = new ArrayList<String>();
 		//Attempt to locate file. Create new file if file does not exist
 		fileName = "Record.txt";
 		try {
@@ -53,23 +53,32 @@ public class TextFileSaver {
 				fileWriter.flush();
 				fileWriter.close();
 				System.out.println(fileName + " does not exists. New .txt file has been created");
-			}
-			
+			}			
 			else{
 				//if file exists, read it into the arraylist fileData
-				BufferedReader br = new BufferedReader(new FileReader(file));
-				while((temp = br.readLine()) != null){
-					fileData.add(temp);
-				}
-				br.close();
-				System.out.println(fileName + " successfully read");
+				readFile();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 			}
 	}
 
-	
+	public void readFile(){
+		String temp;
+		file = new File(fileName);
+		fileData = new ArrayList<String>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			while((temp = br.readLine()) != null){
+				fileData.add(temp);
+			}
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(fileName + " successfully read");
+	}
 	
 	public void saveFile(ArrayList<String> fileData){
 		this.fileData = fileData;

@@ -4,27 +4,31 @@ import java.util.ArrayList;
 
 public class Processor {
 	TextFileSaver saver = new TextFileSaver();
-	public Processor(String command){
+	
+	public Processor(){
+		
+	}
+	
+	public String processCommand(String command){
 		Parser parser = new Parser(command);
 		String commandType = parser.getCommand().getCommandType();
 		switch (commandType){
 			case "add":
 				add(parser);
-				break;
+				return "add";
 			case "delete":
 				delete(parser);
-				break;
-			case "update":
-				update();
-				break;
+				return "delete";
 			default:
+				return "";
 		}
-		
 	}
 	
 	private void add(Parser parser){
+		saver.readFile();
 		ArrayList<String> fileDataList = saver.getFileData();
-		fileDataList.add(parser.getCommand().getTask().getTaskName());			
+		String newTaskName = parser.getCommand().getTask().getTaskName();
+		fileDataList.add(newTaskName);			
 		saver.saveFile(fileDataList);
 	}
 	
@@ -37,8 +41,8 @@ public class Processor {
 	}
 	
 
-	private void update(){
-		
+	public TextFileSaver getSaver(){
+		return saver;
 	}
 	
 	private void view(){

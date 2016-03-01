@@ -8,9 +8,7 @@ public class Task {
 	private String tag = "";
 	private String notification = "";
 	
-	public Task(String userCommand){
-		//TODO parse command into parameters
-		taskName = userCommand.substring(0, userCommand.indexOf(" "));
+	public Task(){
 	}
 
 	public String getTaskName() {

@@ -39,6 +39,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 
@@ -48,10 +49,15 @@ public class TaskPanel extends JPanel {
 	Object rowData[][] = {};
     private GridBagConstraints mainGBC;
 	private GridBagConstraints tasksGBC;
-
+	private JTable table;
+	private DefaultTableModel model;
+	
     public TaskPanel() {
         setLayout(new BorderLayout());
-    	JTable table = new JTable(rowData, titleBarStr);
+        setSize(new Dimension(600, 300));
+    	//table = new JTable(rowData, titleBarStr);
+        model = new DefaultTableModel(titleBarStr,0);
+        table = new JTable(model);
     	JScrollPane scrollPane = new JScrollPane(table);
     	table.setShowGrid(false);
     	table.setOpaque(false);
@@ -61,6 +67,20 @@ public class TaskPanel extends JPanel {
     	
         add(scrollPane, BorderLayout.CENTER);
         //setBackground(Color.GRAY);
+    }
+    
+    public void upDateTaskList(Processor processor){
+    	DefaultTableModel dm = (DefaultTableModel)table.getModel();
+    	for (int i = dm.getRowCount()-1; i >= 0; i--) {
+    		dm.removeRow(i);
+    	}
+    	processor.saver.readFile();
+    	ArrayList<String> fileData = processor.getSaver().getFileData();
+    	DefaultTableModel model = (DefaultTableModel) table.getModel();
+    	for (int i=0; i<fileData.size(); i++){
+        	model.addRow(new Object[]{"", fileData.get(i)});
+    	}
+    	
     }
     
     @Override

@@ -2,20 +2,28 @@ package com.Main;
 
 public class Parser {
 
-	Command command;
+	private Command command;
 
 	public Parser(String cmd) {
+		command = new Command();
 		String commandType = cmd.substring(0, cmd.indexOf(" "));
 		String parameters = cmd.substring(cmd.indexOf(" ") + 1);
 		command.setCommandType(commandType);
 		switch (commandType) {
 		case "add":
-			command.getTask().setTask(getNextParameter(parameters));
-			command.getTask().setLocation(getNextParameter(parameters));
-			command.getTask().setStart(getNextParameter(parameters));
-			command.getTask().setEnd(getNextParameter(parameters));
-			command.getTask().setTag(getNextParameter(parameters));
-			command.getTask().setNotification(getNextParameter(parameters));
+			Task task = new Task();
+			task.setTask(getNextParameter(parameters));
+			parameters = parameters.substring(parameters.indexOf(">") + 1);
+			task.setLocation(getNextParameter(parameters));
+			parameters = parameters.substring(parameters.indexOf(">") + 1);
+			task.setStart(getNextParameter(parameters));
+			parameters = parameters.substring(parameters.indexOf(">") + 1);
+			task.setEnd(getNextParameter(parameters));
+			parameters = parameters.substring(parameters.indexOf(">") + 1);
+			task.setTag(getNextParameter(parameters));
+			parameters = parameters.substring(parameters.indexOf(">") + 1);
+			task.setNotification(getNextParameter(parameters));
+			command.setTask(task);
 			break;
 		case "delete":
 			int deleteRow = Integer.parseInt(parameters);
@@ -34,44 +42,20 @@ public class Parser {
 		return command;
 	}
 	
+	
 	private String getNextParameter(String cmd){
-		cmd.substring(cmd.indexOf("<") + 1, cmd.indexOf(">"));
-		cmd = cmd.substring(cmd.indexOf(">") + 1);
-		return cmd;
+		String parameter = "";
+		if ((cmd.indexOf("<") + 1) != cmd.indexOf(">")) {
+
+			parameter = cmd.substring(cmd.indexOf("<") + 1, cmd.indexOf(">"));
+			
+		}
+		return parameter;
 	}
 
 }
 
-class Command {
-	Task task;
-	String commandType = "";
-	int deleteRow;
 
-	public Command() {
-
-	}
-	
-	public void setDeleteRow(int indexToDelete){
-		deleteRow = indexToDelete;
-	}
-	
-	public int getDeleteRow(){
-		return deleteRow;
-	}
-	
-	public void setCommandType(String cmdType) {
-		commandType = cmdType;
-	}
-
-	public Task getTask() {
-		return task;
-	}
-
-	public String getCommandType() {
-		return commandType;
-	}
-
-}
 
 // 1. split into command + string
 // 2. further split the string into task object
