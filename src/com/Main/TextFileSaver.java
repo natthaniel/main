@@ -12,14 +12,39 @@ import java.util.List;
 
 public class TextFileSaver {
 
-	File file;
-	String fileName;
-	ArrayList<String> fileData;
+	private File file;
+	private String fileName;
+	private ArrayList<String> fileData;
 	
-	public TextFileSaver(String name){
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public ArrayList<String> getFileData() {
+		return fileData;
+	}
+
+	public void setFileData(ArrayList<String> fileData) {
+		this.fileData = fileData;
+	}
+
+	
+	public TextFileSaver(){
 		String temp;
 		//Attempt to locate file. Create new file if file does not exist
-		fileName = name+".txt";
+		fileName = "Record.txt";
 		try {
 			file = new File(fileName);			
 			if(!file.exists()) { 
@@ -46,7 +71,8 @@ public class TextFileSaver {
 
 	
 	
-	public void saveFile(){
+	public void saveFile(ArrayList<String> fileData){
+		this.fileData = fileData;
 		FileWriter savefile;
 		try {
 			String tempSave = "";

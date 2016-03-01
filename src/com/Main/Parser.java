@@ -51,7 +51,7 @@ class Command {
 		deleteRow = indexToDelete;
 	}
 	
-	public int getDeleteRow(int indexToDelete){
+	public int getDeleteRow(){
 		return deleteRow;
 	}
 	

@@ -13,7 +13,7 @@ public class Task {
 		taskName = userCommand.substring(0, userCommand.indexOf(" "));
 	}
 
-	public String getTask() {
+	public String getTaskName() {
 		return taskName;
 	}
 
