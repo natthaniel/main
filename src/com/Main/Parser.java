@@ -9,7 +9,19 @@ public class Parser {
 		String parameters = cmd.substring(cmd.indexOf(" ") + 1);
 		command.setCommandType(commandType);
 		switch (commandType) {
-	
+		case "add":
+			command.getTask().setTask(getNextParameter(parameters));
+			command.getTask().setLocation(getNextParameter(parameters));
+			command.getTask().setStart(getNextParameter(parameters));
+			command.getTask().setEnd(getNextParameter(parameters));
+			command.getTask().setTag(getNextParameter(parameters));
+			command.getTask().setNotification(getNextParameter(parameters));
+			break;
+		case "delete":
+			int deleteRow = Integer.parseInt(parameters);
+			command.setDeleteRow(deleteRow);
+			break;
+
 		default:
 		}
 	}
