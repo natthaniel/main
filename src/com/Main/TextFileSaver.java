@@ -12,14 +12,39 @@ import java.util.List;
 
 public class TextFileSaver {
 
-	File file;
-	String fileName;
-	ArrayList<String> fileData;
+	private File file;
+	private String fileName;
+	private ArrayList<String> fileData;
 	
-	public TextFileSaver(String name){
-		String temp;
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public ArrayList<String> getFileData() {
+		return fileData;
+	}
+
+	public void setFileData(ArrayList<String> fileData) {
+		this.fileData = fileData;
+	}
+
+	
+	public TextFileSaver(){
+		fileData = new ArrayList<String>();
 		//Attempt to locate file. Create new file if file does not exist
-		fileName = name+".txt";
+		fileName = "Record.txt";
 		try {
 			file = new File(fileName);			
 			if(!file.exists()) { 
@@ -28,25 +53,35 @@ public class TextFileSaver {
 				fileWriter.flush();
 				fileWriter.close();
 				System.out.println(fileName + " does not exists. New .txt file has been created");
-			}
-			
+			}			
 			else{
 				//if file exists, read it into the arraylist fileData
-				BufferedReader br = new BufferedReader(new FileReader(file));
-				while((temp = br.readLine()) != null){
-					fileData.add(temp);
-				}
-				br.close();
-				System.out.println(fileName + " successfully read");
+				readFile();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 			}
 	}
 
+	public void readFile(){
+		String temp;
+		file = new File(fileName);
+		fileData = new ArrayList<String>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			while((temp = br.readLine()) != null){
+				fileData.add(temp);
+			}
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(fileName + " successfully read");
+	}
 	
-	
-	public void saveFile(){
+	public void saveFile(ArrayList<String> fileData){
+		this.fileData = fileData;
 		FileWriter savefile;
 		try {
 			String tempSave = "";
