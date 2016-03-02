@@ -47,8 +47,6 @@ public class TaskPanel extends JPanel {
 
 	Object titleBarStr[] = { "", "task", "location", "start", "end", "tag", "notification" };
 	Object rowData[][] = {};
-    private GridBagConstraints mainGBC;
-	private GridBagConstraints tasksGBC;
 	private JTable table;
 	private DefaultTableModel model;
 	

@@ -44,8 +44,4 @@ public class Processor {
 	public TextFileSaver getSaver(){
 		return saver;
 	}
-	
-	private void view(){
-		
-	}
 }
