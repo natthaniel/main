@@ -26,14 +26,11 @@ public class Parser {
 			command.setTask(task);
 			break;
 		case "delete":
-			int deleteRow = Integer.parseInt(parameters);
+			parameters = getNextParameter(parameters);
+			int deleteRow = Integer.parseInt(parameters)-1;
 			command.setDeleteRow(deleteRow);
 			break;
-		case "view":
-			/*TODO list view or display task details
-			 * 
-			 */
-			break;
+
 		default:
 		}
 	}
