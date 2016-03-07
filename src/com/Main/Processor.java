@@ -41,7 +41,7 @@ public class Processor {
 	}
 	
 
-	public TextFileSaver getSaver(){
+	public TextFileSaver getStorage(){
 		return storage;
 	}
 }
