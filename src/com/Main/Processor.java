@@ -3,7 +3,7 @@ package com.Main;
 import java.util.ArrayList;
 
 public class Processor {
-	TextFileSaver saver = new TextFileSaver();
+	TextFileSaver storage = new TextFileSaver();
 	
 	public Processor(){
 		
@@ -25,23 +25,23 @@ public class Processor {
 	}
 	
 	private void add(Parser parser){
-		saver.readFile();
-		ArrayList<String> fileDataList = saver.getFileData();
-		String newTaskName = parser.getCommand().getTask().getTaskName();
-		fileDataList.add(newTaskName);			
-		saver.saveFile(fileDataList);
+		storage.readFile();
+		ArrayList<Task> TaskList = storage.getTaskData();
+		TaskList.add(parser.getCommand().getTask());
+		
+		storage.saveFile(TaskList);
 	}
 	
 
 	private void delete(Parser parser){
 		int indexForDeletion = parser.getCommand().getDeleteRow();
-		ArrayList<String> fileDataList = saver.getFileData();
-		fileDataList.remove(indexForDeletion);
-		saver.saveFile(fileDataList);
+		ArrayList<Task> TaskList = storage.getTaskData();
+		TaskList.remove(indexForDeletion);
+		storage.saveFile(TaskList);
 	}
 	
 
-	public TextFileSaver getSaver(){
-		return saver;
+	public TextFileSaver getStorage(){
+		return storage;
 	}
 }

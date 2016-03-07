@@ -72,8 +72,8 @@ public class TaskPanel extends JPanel {
     	for (int i = dm.getRowCount()-1; i >= 0; i--) {
     		dm.removeRow(i);
     	}
-    	processor.saver.readFile();
-    	ArrayList<String> fileData = processor.getSaver().getFileData();
+    	processor.storage.readFile();
+    	ArrayList<Task> fileData = processor.getStorage().getTaskData();
     	DefaultTableModel model = (DefaultTableModel) table.getModel();
     	for (int i=0; i<fileData.size(); i++){
         	model.addRow(new Object[]{"", fileData.get(i)});
