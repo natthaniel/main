@@ -3,6 +3,7 @@ package com.Main;
 public class Task {
 	private String taskName = "";
 	private String location = "";
+	private String date = "";
 	private String start = "";
 	private String end = "";
 	private String tag = "";
@@ -17,6 +18,9 @@ public class Task {
 
 	public String getLocation() {
 		return location;
+	}
+	public String getDate(){
+		return date;
 	}
 
 	public String getStart() {
@@ -41,6 +45,10 @@ public class Task {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public void setStart(String start) {
