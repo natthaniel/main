@@ -14,7 +14,7 @@ public class TextFileSaver {
 
 	private File file;
 	private String fileName;
-	private ArrayList<String> fileData;
+	private ArrayList<Task> taskData;
 	
 	public File getFile() {
 		return file;
@@ -31,18 +31,18 @@ public class TextFileSaver {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
-	public ArrayList<String> getFileData() {
-		return fileData;
+	
+	public ArrayList<Task> getTaskData(){
+		return taskData;
 	}
-
-	public void setFileData(ArrayList<String> fileData) {
-		this.fileData = fileData;
+	
+	public void setTaskData(ArrayList<Task> taskData){
+		this.taskData = taskData;
 	}
 
 	
 	public TextFileSaver(){
-		fileData = new ArrayList<String>();
+		taskData = new ArrayList<Task>();
 		//Attempt to locate file. Create new file if file does not exist
 		fileName = "Record.txt";
 		try {
@@ -65,13 +65,14 @@ public class TextFileSaver {
 
 	public void readFile(){
 		String temp;
+		Task tempTask = new Task();
 		file = new File(fileName);
-		fileData = new ArrayList<String>();
+		taskData = new ArrayList<Task>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			while((temp = br.readLine()) != null){
-				fileData.add(temp);
-			}
+				addToTaskList(temp, tempTask);
+			}	
 			br.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -79,15 +80,35 @@ public class TextFileSaver {
 		}
 		System.out.println(fileName + " successfully read");
 	}
+
+	/*Split the each line to 6 different segments. Each segment is separated in the .txt file by ~~. Add each
+	 * segment to tempTask for create a proper Task and add it to the Task ArrayList (taskData)*/
+	private void addToTaskList(String temp, Task tempTask) {
+		String[] holder;
+		holder = temp.split("~~", 6);
+		tempTask.setTask(holder[0]);
+		tempTask.setLocation(holder[1]);
+		tempTask.setStart(holder[2]);
+		tempTask.setEnd(holder[3]);
+		tempTask.setTag(holder[4]);
+		tempTask.setNotification(holder[5]);
+		taskData.add(tempTask);
+		holder = null;
+	}
 	
-	public void saveFile(ArrayList<String> fileData){
-		this.fileData = fileData;
+	public void saveFile(ArrayList<Task> taskData){
+		this.taskData = taskData;
 		FileWriter savefile;
 		try {
 			String tempSave = "";
+			Task tempTaskForSaving = new Task();
+			String[] taskToString = new String[6];
 			savefile = new FileWriter(fileName);
-			for(int i=0; i<fileData.size(); i++){             //Process the array list into a single string
-				tempSave = tempSave + fileData.get(i) + "\n";
+			for(int i=0; i<taskData.size(); i++){             //Process the task list into a single string
+				tempTaskForSaving = taskData.get(i);
+				convertTaskToString(tempTaskForSaving, taskToString);
+				tempSave = processIntoSingleStringForSaving(tempSave,
+						taskToString);
 			}
 			savefile.write(tempSave);                            //Write the processed string into the file
 			savefile.close();
@@ -96,5 +117,23 @@ public class TextFileSaver {
 			e.printStackTrace();
 		}
 		
+	}
+
+	/*Convert the string arrays into a single string with proper formatting before saving*/
+	private String processIntoSingleStringForSaving(String tempSave,
+			String[] taskToString) {
+		tempSave = tempSave + taskToString[0] + "~~" + taskToString[1] + "~~" + taskToString[2] + "~~"+ taskToString[3] + "~~"+ taskToString[4] + "~~"+ taskToString[5]+ "\n";
+		return tempSave;
+	}
+	
+	/*Convert the task into a string array*/
+	private void convertTaskToString(Task tempTaskForSaving,
+			String[] taskToString) {
+		taskToString[0] = tempTaskForSaving.getTaskName();
+		taskToString[1] = tempTaskForSaving.getLocation();
+		taskToString[2] = tempTaskForSaving.getStart();
+		taskToString[3] = tempTaskForSaving.getEnd();
+		taskToString[4] = tempTaskForSaving.getTag();
+		taskToString[5] = tempTaskForSaving.getNotification();
 	}
 }
