@@ -17,29 +17,20 @@ public class Parser {
 		String parameters = cmd.substring(cmd.indexOf(" ") + 1);
 		command.setCommandType(commandType);
 		switch (commandType) {
+		
+		// add task @location on date from 1230~1300 #tag -notification
 		case "add":
-			Task task = new Task();
-			taskName = getTaskName(parameters);
-			task.setTask(taskName);
-			date = getDate(parameters);
-			task.setDate(date);
-			location = getLocation(parameters);
-			task.setLocation(location);
-			start = getStart(parameters);
-			task.setStart(start);
-			end = getEnd(parameters);
-			task.setEnd(end);
-			tag = getTag(parameters);
-			task.setTag(tag);
-			notification = getNotification(parameters);
-			task.setNotification(notification);
-			command.setTask(task);
+			createTaskWithParameters(parameters);
 			break;
 		
+		// delete taskNumber
 		case "delete":
-			//parameters = getNextParameter(parameters);
-			int deleteRow = Integer.parseInt(parameters)-1;
-			command.setDeleteRow(deleteRow);
+			processDelete(parameters);
+			break;
+		
+		// update taskNumber detailType newValue	
+		case "update":
+			
 			break;
 
 		default:
@@ -49,6 +40,29 @@ public class Parser {
 	public Command getCommand() {
 		return command;
 	}
+	private void processDelete(String parameters){
+		int deleteRow = Integer.parseInt(parameters)-1;
+		command.setDeleteRow(deleteRow);
+	}
+	private void createTaskWithParameters(String parameters){
+		Task task = new Task();
+		taskName = getTaskName(parameters);
+		task.setTask(taskName);
+		date = getDate(parameters);
+		task.setDate(date);
+		location = getLocation(parameters);
+		task.setLocation(location);
+		start = getStart(parameters);
+		task.setStart(start);
+		end = getEnd(parameters);
+		task.setEnd(end);
+		tag = getTag(parameters);
+		task.setTag(tag);
+		notification = getNotification(parameters);
+		task.setNotification(notification);
+		command.setTask(task);
+	}
+	
 
 	private String getTaskName(String parameters){
 		String taskName = "";
@@ -92,7 +106,3 @@ public class Parser {
 
 }
 
-// add task @location on date from 1230~1300 #tag -notification
-
-// 1. split into command + string
-// 2. further split the string into task object
