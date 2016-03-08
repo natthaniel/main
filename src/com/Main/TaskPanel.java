@@ -76,7 +76,8 @@ public class TaskPanel extends JPanel {
     	ArrayList<Task> fileData = processor.getStorage().getTaskData();
     	DefaultTableModel model = (DefaultTableModel) table.getModel();
     	for (int i=0; i<fileData.size(); i++){
-        	model.addRow(new Object[]{"", fileData.get(i)});
+    		Task currentTask = fileData.get(i);
+        	model.addRow(new Object[]{"", currentTask.getTaskName(), currentTask.getLocation(), currentTask.getStart(), currentTask.getEnd(), currentTask.getTag(), currentTask.getNotification()});
     	}
     	
     }
