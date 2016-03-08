@@ -34,14 +34,20 @@ public class Processor {
 		}
 	}
 	
-	private void updateTask(Parser parser) {
+	private TaskforUpdateFunction updateTask(Parser parser) {
 		int IndexForUpdate = parser.getCommand().getUpdateRow() - 1;
 		String TypeToUpdate = parser.getCommand().getUpdateType();
 		String DetailToUpdate = parser.getCommand().getUpdateDetail();
 		ArrayList<Task> TaskList = storage.getTaskData();
+		
+		TaskforUpdateFunction UpdatedTask = new TaskforUpdateFunction();
+		UpdatedTask.setOldTask(TaskList.get(IndexForUpdate));
 		TaskList = executeUpdateRequest(IndexForUpdate, TypeToUpdate, DetailToUpdate, TaskList);
+		
+		UpdatedTask.setNewTask(TaskList.get(IndexForUpdate));
 		storage.saveFile(TaskList);
 		//displayOneTask(IndexForUpdate, TaskList);
+		return UpdatedTask;
 	}
 
 	private String displayOneTask(int indexForUpdate, ArrayList<Task> taskList) {
