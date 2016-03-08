@@ -84,16 +84,16 @@ public class TextFileSaver {
 	/*Split the each line to 6 different segments. Each segment is separated in the .txt file by ~~. Add each
 	 * segment to tempTask for create a proper Task and add it to the Task ArrayList (taskData)*/
 	private void addToTaskList(String temp, Task tempTask) {
-		String[] holder;
-		holder = temp.split("~~", 6);
-		tempTask.setTask(holder[0]);
-		tempTask.setLocation(holder[1]);
-		tempTask.setStart(holder[2]);
-		tempTask.setEnd(holder[3]);
-		tempTask.setTag(holder[4]);
-		tempTask.setNotification(holder[5]);
+		String[] _temp = new String[6];
+		_temp = temp.split("~~", -1);
+		tempTask.setTask(_temp[0]);
+		tempTask.setLocation(_temp[1]);
+		tempTask.setStart(_temp[2]);
+		tempTask.setEnd(_temp[3]);
+		tempTask.setTag(_temp[4]);
+		tempTask.setNotification(_temp[5]);
 		taskData.add(tempTask);
-		holder = null;
+		_temp = null;
 	}
 	
 	public void saveFile(ArrayList<Task> taskData){
