@@ -30,7 +30,7 @@ public class Parser {
 		
 		// update taskNumber detailType newValue	
 		case "update":
-			
+			processUpdate(parameters);
 			break;
 
 		default:
@@ -40,8 +40,19 @@ public class Parser {
 	public Command getCommand() {
 		return command;
 	}
+	
+	private void processUpdate(String parameters){
+		int updateRow = getUpdateRow(parameters);
+		command.setUpdateRow(updateRow);
+		parameters = parameters.substring(parameters.indexOf(" "));
+		String updateType = parameters.substring(0,parameters.indexOf(" "));
+		command.setUpdateType(updateType);
+		parameters = parameters.substring(parameters.indexOf(" "));
+		String updateDetail = parameters;
+		command.setUpdateDetail(updateDetail);
+	}
 	private void processDelete(String parameters){
-		int deleteRow = Integer.parseInt(parameters)-1;
+		int deleteRow = getDeleteRow(parameters);
 		command.setDeleteRow(deleteRow);
 	}
 	private void createTaskWithParameters(String parameters){
@@ -63,7 +74,16 @@ public class Parser {
 		command.setTask(task);
 	}
 	
-
+	private int getUpdateRow(String parameters){
+		int updateRow;
+		updateRow = Integer.parseInt(parameters.substring(0, parameters.indexOf(" ") - 1));
+		return updateRow;
+	}
+	
+	private int getDeleteRow(String parameters){
+		int deleteRow = Integer.parseInt(parameters)-1;
+		return deleteRow;
+	}
 	private String getTaskName(String parameters){
 		String taskName = "";
 		taskName = parameters.substring(0, parameters.indexOf("@") - 1);
