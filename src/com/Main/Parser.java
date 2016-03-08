@@ -76,12 +76,12 @@ public class Parser {
 	}
 	private String getDate(String parameters){
 		String date = "";
-		date = parameters.substring(parameters.indexOf("on") + 1, parameters.indexOf("from") - 1);
+		date = parameters.substring(parameters.indexOf("on") + 2, parameters.indexOf("from") - 1);
 		return date;
 	}
 	private String getStart(String parameters){
 		String start = "";
-		start = parameters.substring(parameters.indexOf("from") + 1, parameters.indexOf("~") - 1);
+		start = parameters.substring(parameters.indexOf("from") + 4, parameters.indexOf("~"));
 		return start;
 	}
 	private String getEnd(String parameters){
