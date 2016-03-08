@@ -2,8 +2,8 @@ package com.Main;
 
 public class Task {
 	private String taskName = "";
-	private String location = "";
 	private String date = "";
+	private String location = "";
 	private String start = "";
 	private String end = "";
 	private String tag = "";
