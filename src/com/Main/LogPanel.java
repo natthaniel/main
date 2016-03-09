@@ -57,21 +57,13 @@ public class LogPanel extends JPanel{
 	    String tagUpdateLabel =   "Tag:                 "+ oldTask.getTag() +"     =>     " + newTask.getTag();
 	    String notiUpdateLabel =  "Notification:   "+ oldTask.getNotification() +"     =>     " + newTask.getNotification();
 		
-		JLabel taskLabel = new JLabel(taskUpdateLabel);
-		JLabel locatLabel = new JLabel(locatUpdateLabel);
-		JLabel startLabel = new JLabel(startUpdateLabel);
-		JLabel endLabel = new JLabel(endUpdateLabel);
-		JLabel tagLabel = new JLabel(tagUpdateLabel);
-		JLabel notiLabel = new JLabel(notiUpdateLabel);
-		
-		add(taskLabel, tasksGBC, counter++);
-		add(locatLabel, tasksGBC, counter++);
-		add(startLabel, tasksGBC, counter++);
-		add(endLabel, tasksGBC, counter++);
-		add(tagLabel, tasksGBC, counter++);
-		add(notiLabel, tasksGBC, counter++);
-		validate();
-		
+	    recordToLog(taskUpdateLabel);
+	    recordToLog(locatUpdateLabel);
+	    recordToLog(startUpdateLabel);
+	    recordToLog(endUpdateLabel);
+	    recordToLog(tagUpdateLabel);
+	    recordToLog(notiUpdateLabel);
+	   
 	}
 	
 	private void mainGBCInit(){
