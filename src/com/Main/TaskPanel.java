@@ -72,14 +72,14 @@ public class TaskPanel extends JPanel {
     	for (int i = dm.getRowCount()-1; i >= 0; i--) {
     		dm.removeRow(i);
     	}
-    	processor.storage.readFile();
+    	processor.readFile();
     	ArrayList<Task> fileData = processor.getStorage().getTaskData();
-    	DefaultTableModel model = (DefaultTableModel) table.getModel();
-    	for (int i=0; i<fileData.size(); i++){
+    	//DefaultTableModel model = (DefaultTableModel) table.getModel();
+		for (int i=0; i<fileData.size(); i++){
     		Task currentTask = fileData.get(i);
-        	model.addRow(new Object[]{"", currentTask.getTaskName(), currentTask.getLocation(), currentTask.getStart(), currentTask.getEnd(), currentTask.getTag(), currentTask.getNotification()});
+    		System.out.print(currentTask.getTaskName());
+        	dm.addRow(new Object[]{"", currentTask.getTaskName(), currentTask.getLocation(), currentTask.getStart(), currentTask.getEnd(), currentTask.getTag(), currentTask.getNotification()});
     	}
-    	
     }
     
     @Override

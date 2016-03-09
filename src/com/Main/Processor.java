@@ -11,10 +11,11 @@ public class Processor {
 	private static final String DISPLAY_TASK_TAG_MESSAGE = "Tag:%1$s\r\n";
 	private static final String DISPLAY_TASK_NOTIFICATION_MESSAGE = "Notification:%1$s\r\n";
 	     
-	TextFileSaver storage = new TextFileSaver();
+	private TextFileSaver storage = new TextFileSaver();
+	TaskforUpdateFunction UpdatedTask;
 	
 	public Processor(){
-		
+		UpdatedTask = new TaskforUpdateFunction();
 	}
 	
 	public String processCommand(String command){
@@ -29,6 +30,7 @@ public class Processor {
 				return "delete";
 			case "update":
 				updateTask(parser);
+				return "update";
 			default:
 				return "";
 		}
@@ -39,14 +41,14 @@ public class Processor {
 		String TypeToUpdate = parser.getCommand().getUpdateType();
 		String DetailToUpdate = parser.getCommand().getUpdateDetail();
 		ArrayList<Task> TaskList = storage.getTaskData();
-		
-		TaskforUpdateFunction UpdatedTask = new TaskforUpdateFunction();
+
 		UpdatedTask.setOldTask(TaskList.get(IndexForUpdate));
 		TaskList = executeUpdateRequest(IndexForUpdate, TypeToUpdate, DetailToUpdate, TaskList);
 		
 		UpdatedTask.setNewTask(TaskList.get(IndexForUpdate));
 		storage.saveFile(TaskList);
 		//displayOneTask(IndexForUpdate, TaskList);
+		
 		return UpdatedTask;
 	}
 
@@ -113,5 +115,13 @@ public class Processor {
 	
 	public TextFileSaver getStorage(){
 		return storage;
+	}
+	
+	public TaskforUpdateFunction getUpdatedTask(){
+		return UpdatedTask;
+	}
+	
+	public void readFile(){
+		storage.readFile();
 	}
 }

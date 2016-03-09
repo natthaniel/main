@@ -84,13 +84,25 @@ public class HomeFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String userCommand = userInputBox.getText();
-				processor.processCommand(userCommand); 
+				String commandType = processor.processCommand(userCommand); 
 				taskList.upDateTaskList(processor);
 				logPanel.recordToLog(userCommand);
+				
+				if (commandType == "update"){
+					TaskforUpdateFunction UpdatedTask = processor.getUpdatedTask();
+					taskUpdatedWindow(UpdatedTask);
+					
+				}
 			}			
     	});  
         
         return panel;
         
     }   	
+	
+	
+	public void taskUpdatedWindow(TaskforUpdateFunction UpdatedTask){
+		JFrame taskUpdatedWindow = new JFrame("Task Updated");
+		
+	}
 }

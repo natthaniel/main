@@ -65,12 +65,12 @@ public class TextFileSaver {
 
 	public void readFile(){
 		String temp;
-		Task tempTask = new Task();
 		file = new File(fileName);
 		taskData = new ArrayList<Task>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			while((temp = br.readLine()) != null){
+				Task tempTask = new Task();
 				addToTaskList(temp, tempTask);
 			}	
 			br.close();
