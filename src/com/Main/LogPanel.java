@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -19,6 +20,7 @@ public class LogPanel extends JPanel{
 
 	private GridBagConstraints tasksGBC;
     private GridBagConstraints mainGBC;
+    private int counter = 0;
 	
 	public LogPanel(){
 		setPreferredSize(new Dimension(600, 300));
@@ -30,15 +32,46 @@ public class LogPanel extends JPanel{
 		JPanel dummyPanel = new JPanel();
         dummyPanel.setBackground(new Color(0, 0, 0, 0));
         add(dummyPanel, mainGBC);
-        
+		 
+		JLabel logItem = new JLabel("Welcome to TODO List!!");                                 
+		add(logItem, tasksGBC, 0);
+		counter++;
         
 	}
 	
 	public void recordToLog(String userCommand){
 		JLabel logItem = new JLabel(userCommand);                                 
-		add(logItem, tasksGBC, 0);
+		add(logItem, tasksGBC, counter++);
 		validate();
 		repaint();
+	}
+	
+	public void displayUpdatedTask(TaskforUpdateFunction updatedTask){
+		Task oldTask = updatedTask.getOldTask();
+		Task newTask = updatedTask.getNewTask();
+
+	    String taskUpdateLabel =  "Task:               "+ oldTask.getTaskName() +"     =>     " + newTask.getTaskName();
+	    String locatUpdateLabel = "Location:        "+ oldTask.getLocation() +"     =>     " + newTask.getLocation();
+	    String startUpdateLabel = "Start:              "+ oldTask.getStart() +"     =>     " + newTask.getStart();
+	    String endUpdateLabel =   "End:                 "+ oldTask.getEnd() +"     =>     " + newTask.getEnd();
+	    String tagUpdateLabel =   "Tag:                 "+ oldTask.getTag() +"     =>     " + newTask.getTag();
+	    String notiUpdateLabel =  "Notification:   "+ oldTask.getNotification() +"     =>     " + newTask.getNotification();
+		
+		JLabel taskLabel = new JLabel(taskUpdateLabel);
+		JLabel locatLabel = new JLabel(locatUpdateLabel);
+		JLabel startLabel = new JLabel(startUpdateLabel);
+		JLabel endLabel = new JLabel(endUpdateLabel);
+		JLabel tagLabel = new JLabel(tagUpdateLabel);
+		JLabel notiLabel = new JLabel(notiUpdateLabel);
+		
+		add(taskLabel, tasksGBC, counter++);
+		add(locatLabel, tasksGBC, counter++);
+		add(startLabel, tasksGBC, counter++);
+		add(endLabel, tasksGBC, counter++);
+		add(tagLabel, tasksGBC, counter++);
+		add(notiLabel, tasksGBC, counter++);
+		validate();
+		
 	}
 	
 	private void mainGBCInit(){

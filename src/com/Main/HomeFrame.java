@@ -86,11 +86,11 @@ public class HomeFrame extends JFrame{
 				String userCommand = userInputBox.getText();
 				String commandType = processor.processCommand(userCommand); 
 				taskList.upDateTaskList(processor);
-				logPanel.recordToLog(userCommand);
 				
+				logPanel.recordToLog(userCommand);
 				if (commandType == "update"){
 					TaskforUpdateFunction UpdatedTask = processor.getUpdatedTask();
-					taskUpdatedWindow(UpdatedTask);
+					logPanel.displayUpdatedTask(UpdatedTask);				
 					
 				}
 			}			

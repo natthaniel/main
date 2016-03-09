@@ -44,11 +44,12 @@ public class Parser {
 	private void processUpdate(String parameters){
 		int updateRow = getUpdateRow(parameters);
 		command.setUpdateRow(updateRow);
-		parameters = parameters.substring(parameters.indexOf(" "));
+		parameters = parameters.substring(parameters.indexOf(" ") + 1);
+		System.out.println(parameters.substring(0,parameters.indexOf(" ")));
 		String updateType = parameters.substring(0,parameters.indexOf(" "));
 		command.setUpdateType(updateType);
 		parameters = parameters.substring(parameters.indexOf(" "));
-		String updateDetail = parameters;
+		String updateDetail = parameters.substring(parameters.indexOf(" ")+1);
 		command.setUpdateDetail(updateDetail);
 	}
 	private void processDelete(String parameters){
@@ -76,7 +77,7 @@ public class Parser {
 	
 	private int getUpdateRow(String parameters){
 		int updateRow;
-		updateRow = Integer.parseInt(parameters.substring(0, parameters.indexOf(" ") - 1));
+		updateRow = Integer.parseInt(parameters.substring(0, parameters.indexOf(" "))); 
 		return updateRow;
 	}
 	

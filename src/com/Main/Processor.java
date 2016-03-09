@@ -85,8 +85,8 @@ public class Processor {
 
 	private ArrayList<Task> executeUpdateRequest(int IndexForUpdate, String TypeToUpdate, String DetailToUpdate,
 			ArrayList<Task> TaskList) {
-		switch (TypeToUpdate){
-		case "title":
+		switch (TypeToUpdate.toLowerCase()){
+		case "task":
 			TaskList.get(IndexForUpdate).setTask(DetailToUpdate);
 			break;
 		case "location":

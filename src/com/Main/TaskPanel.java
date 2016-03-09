@@ -77,8 +77,7 @@ public class TaskPanel extends JPanel {
     	//DefaultTableModel model = (DefaultTableModel) table.getModel();
 		for (int i=0; i<fileData.size(); i++){
     		Task currentTask = fileData.get(i);
-    		System.out.print(currentTask.getTaskName());
-        	dm.addRow(new Object[]{"", currentTask.getTaskName(), currentTask.getLocation(), currentTask.getStart(), currentTask.getEnd(), currentTask.getTag(), currentTask.getNotification()});
+        	dm.addRow(new Object[]{ String.valueOf(i+1), currentTask.getTaskName(), currentTask.getLocation(), currentTask.getStart(), currentTask.getEnd(), currentTask.getTag(), currentTask.getNotification()});
     	}
     }
     
