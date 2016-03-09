@@ -55,16 +55,28 @@ public class TaskPanel extends JPanel {
         setSize(new Dimension(600, 300));
     	//table = new JTable(rowData, titleBarStr);
         model = new DefaultTableModel(titleBarStr,0);
-        table = new JTable(model);
-    	JScrollPane scrollPane = new JScrollPane(table);
-    	table.setShowGrid(false);
+        table = new JTable(model){
+        	private static final long serialVersionUID = 1L;
+
+            @Override
+                public boolean isCellEditable(int row, int column) {
+                   return false;
+                }
+        };
+        table.getColumnModel().getColumn(0).setPreferredWidth(20);
+    	//table.setShowGrid(false);
+        table.setGridColor(new Color(255, 255, 255, 125));
+        table.setFillsViewportHeight( true );
     	table.setOpaque(false);
-    	table.setBackground(new Color(255, 255, 255, 1));
+    	table.setBackground(new Color(255, 255, 255, 125));
+    	table.setFont(new Font("Calibri", Font.BOLD, 15));
+    	
+    	JScrollPane scrollPane = new JScrollPane(table);
     	scrollPane.setOpaque(false);
     	scrollPane.getViewport().setOpaque(false);
     	
-        add(scrollPane, BorderLayout.CENTER);
-        //setBackground(Color.GRAY);
+    	
+        add(scrollPane);
     }
     
     public void upDateTaskList(Processor processor){

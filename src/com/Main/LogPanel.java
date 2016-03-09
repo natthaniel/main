@@ -21,6 +21,7 @@ public class LogPanel extends JPanel{
 	private GridBagConstraints tasksGBC;
     private GridBagConstraints mainGBC;
     private int counter = 0;
+    private String MESSAGE_WELCOME = "Welcome to TODO List!!";
 	
 	public LogPanel(){
 		setPreferredSize(new Dimension(600, 300));
@@ -33,14 +34,16 @@ public class LogPanel extends JPanel{
         dummyPanel.setBackground(new Color(0, 0, 0, 0));
         add(dummyPanel, mainGBC);
 		 
-		JLabel logItem = new JLabel("Welcome to TODO List!!");                                 
+		JLabel logItem = new JLabel("Welcome to TODO List!!");  
+		logItem.setBorder(new EmptyBorder(1, 10, 1, 10));                               
 		add(logItem, tasksGBC, 0);
 		counter++;
         
 	}
 	
 	public void recordToLog(String userCommand){
-		JLabel logItem = new JLabel(userCommand);                                 
+		JLabel logItem = new JLabel(userCommand); 
+		logItem.setBorder(new EmptyBorder(1, 10, 1, 10));
 		add(logItem, tasksGBC, counter++);
 		validate();
 		repaint();
