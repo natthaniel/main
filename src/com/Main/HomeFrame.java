@@ -33,6 +33,7 @@ public class HomeFrame extends JFrame{
 	private JTextField userInputBox;
 	private JSplitPane mainPanel;
 	private Processor processor;
+	private JButton enterButton;
 
 	// Constructor of main frame
 	public HomeFrame()
@@ -77,8 +78,10 @@ public class HomeFrame extends JFrame{
     	JPanel panel = new JPanel();
         userInputBox = new JTextField(30);
         panel.add(userInputBox);
-        JButton enterButton = new JButton("Enter");
+        enterButton = new JButton("Enter");
         panel.add(enterButton);
+        
+        getRootPane().setDefaultButton(enterButton);
         
         enterButton.addActionListener(new ActionListener() {        	
 			@Override
