@@ -44,13 +44,14 @@ public class HomeFrame extends JFrame{
 		setBackground( Color.WHITE );
  
 		mainPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-		mainPanel.setDividerSize(3);
+		mainPanel.setDividerSize(2);
 		getContentPane().add(mainPanel);
-		JScrollPane scrollPanel = new JScrollPane();
 		logPanel = new LogPanel();
-		scrollPanel.setViewportView(logPanel);
-		mainPanel.setLeftComponent(scrollPanel);
 		
+
+		//scrollPaneForLog = new JScrollPane(logPanel);
+		//scrollPanel.setViewportView(logPanel);
+		mainPanel.setLeftComponent(logPanel);
 		
         JPanel panel = userInputBar();
         add(panel, BorderLayout.SOUTH);
