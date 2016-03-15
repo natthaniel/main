@@ -84,14 +84,15 @@ public class TextFileSaver {
 	/*Split the each line to 6 different segments. Each segment is separated in the .txt file by ~~. Add each
 	 * segment to tempTask for create a proper Task and add it to the Task ArrayList (taskData)*/
 	private void addToTaskList(String temp, Task tempTask) {
-		String[] _temp = new String[6];
+		String[] _temp = new String[7];
 		_temp = temp.split("~~", -1);
 		tempTask.setTask(_temp[0]);
 		tempTask.setLocation(_temp[1]);
-		tempTask.setStart(_temp[2]);
-		tempTask.setEnd(_temp[3]);
-		tempTask.setTag(_temp[4]);
-		tempTask.setNotification(_temp[5]);
+		tempTask.setDate(_temp[2]);
+		tempTask.setStart(_temp[3]);
+		tempTask.setEnd(_temp[4]);
+		tempTask.setTag(_temp[5]);
+		tempTask.setNotification(_temp[6]);
 		taskData.add(tempTask);
 		_temp = null;
 	}
@@ -102,7 +103,7 @@ public class TextFileSaver {
 		try {
 			String tempSave = "";
 			Task tempTaskForSaving = new Task();
-			String[] taskToString = new String[6];
+			String[] taskToString = new String[7];
 			savefile = new FileWriter(fileName);
 			for(int i=0; i<taskData.size(); i++){             //Process the task list into a single string
 				tempTaskForSaving = taskData.get(i);
@@ -122,7 +123,7 @@ public class TextFileSaver {
 	/*Convert the string arrays into a single string with proper formatting before saving*/
 	private String processIntoSingleStringForSaving(String tempSave,
 			String[] taskToString) {
-		tempSave = tempSave + taskToString[0] + "~~" + taskToString[1] + "~~" + taskToString[2] + "~~"+ taskToString[3] + "~~"+ taskToString[4] + "~~"+ taskToString[5]+ "\n";
+		tempSave = tempSave + taskToString[0] + "~~" + taskToString[1] + "~~" + taskToString[2] + "~~"+ taskToString[3] + "~~"+ taskToString[4] + "~~"+ taskToString[5]+ "~~" + taskToString[6] + "\n";
 		return tempSave;
 	}
 	
@@ -131,9 +132,10 @@ public class TextFileSaver {
 			String[] taskToString) {
 		taskToString[0] = tempTaskForSaving.getTaskName();
 		taskToString[1] = tempTaskForSaving.getLocation();
-		taskToString[2] = tempTaskForSaving.getStart();
-		taskToString[3] = tempTaskForSaving.getEnd();
-		taskToString[4] = tempTaskForSaving.getTag();
-		taskToString[5] = tempTaskForSaving.getNotification();
+		taskToString[2] = tempTaskForSaving.getDate();
+		taskToString[3] = tempTaskForSaving.getStart();
+		taskToString[4] = tempTaskForSaving.getEnd();
+		taskToString[5] = tempTaskForSaving.getTag();
+		taskToString[6] = tempTaskForSaving.getNotification();
 	}
 }
