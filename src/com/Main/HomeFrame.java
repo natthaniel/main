@@ -34,6 +34,9 @@ public class HomeFrame extends JFrame{
 	private JSplitPane mainPanel;
 	private Processor processor;
 	private JButton enterButton;
+	
+	private static final String MESSAGE_INVALID_COMMAND = "Invalid command.";
+	private static final String MESSAGE_COMMAND = "Command: ";
 
 	// Constructor of main frame
 	public HomeFrame()
@@ -88,16 +91,24 @@ public class HomeFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String userCommand = userInputBox.getText();
-				String commandType = processor.processCommand(userCommand); 
-				taskList.upDateTaskList(processor);
-				
-				logPanel.recordToLog(userCommand);
-				if (commandType == "update"){
-					TaskforUpdateFunction UpdatedTask = processor.getUpdatedTask();
-					logPanel.displayUpdatedTask(UpdatedTask);				
+				if (!userCommand.equals("")) {
+
+					String commandType = processor.processCommand(userCommand); 
+					taskList.upDateTaskList(processor);
 					
+					logPanel.recordToLog(MESSAGE_COMMAND + userCommand);
+					if (commandType == "update" || commandType == "delete" ||commandType == "add") {
+
+						if (commandType == "update"){
+							TaskforUpdateFunction UpdatedTask = processor.getUpdatedTask();
+							logPanel.displayUpdatedTask(UpdatedTask);				
+							
+						}
+					} else {
+						logPanel.recordToLog(MESSAGE_INVALID_COMMAND);
+					}
+					userInputBox.setText("");
 				}
-				userInputBox.setText("");
 			}			
     	});  
         

@@ -23,8 +23,8 @@ public class Command {
 	public void setDeleteRow(int indexToDelete){
 		deleteRow = indexToDelete;
 	}
-	public void setUpdateRow(int indexToUpdate){
-		updateRow = indexToUpdate;
+	public void setUpdateRow(int indexToDelete){
+		updateRow = indexToDelete;
 	}
 	
 	public void setCommandType(String cmdType) {

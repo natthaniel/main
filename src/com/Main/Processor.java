@@ -41,8 +41,8 @@ public class Processor {
 		String TypeToUpdate = parser.getCommand().getUpdateType();
 		String DetailToUpdate = parser.getCommand().getUpdateDetail();
 		ArrayList<Task> TaskList = storage.getTaskData();
+
 		UpdatedTask.setOldTask(TaskList.get(IndexForUpdate));
-		
 		TaskList = executeUpdateRequest(IndexForUpdate, TypeToUpdate, DetailToUpdate, TaskList);
 		
 		UpdatedTask.setNewTask(TaskList.get(IndexForUpdate));
