@@ -96,6 +96,7 @@ public class HomeFrame extends JFrame{
 					logPanel.displayUpdatedTask(UpdatedTask);				
 					
 				}
+				userInputBox.setText("");
 			}			
     	});  
         
