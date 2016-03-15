@@ -45,7 +45,7 @@ import java.awt.*;
 
 public class TaskPanel extends JPanel {
 
-	Object titleBarStr[] = { "", "task", "location", "start", "end", "tag", "notification" };
+	Object titleBarStr[] = { "No.", "Task", "Location", "Date", "Start", "End", "Tag", "Notification" };
 	Object rowData[][] = {};
 	private JTable table;
 	private DefaultTableModel model;
@@ -89,7 +89,7 @@ public class TaskPanel extends JPanel {
     	//DefaultTableModel model = (DefaultTableModel) table.getModel();
 		for (int i=0; i<fileData.size(); i++){
     		Task currentTask = fileData.get(i);
-        	dm.addRow(new Object[]{ String.valueOf(i+1), currentTask.getTaskName(), currentTask.getLocation(), currentTask.getStart(), currentTask.getEnd(), currentTask.getTag(), currentTask.getNotification()});
+        	dm.addRow(new Object[]{ String.valueOf(i+1), currentTask.getTaskName(), currentTask.getLocation(), currentTask.getDate(),currentTask.getStart(), currentTask.getEnd(), currentTask.getTag(), currentTask.getNotification()});
     	}
     }
     
