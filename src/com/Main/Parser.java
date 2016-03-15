@@ -37,6 +37,9 @@ public class Parser {
 		}
 	}
 
+	private void checkAndAddParameters(String parameters){
+		
+	}
 	public Command getCommand() {
 		return command;
 	}
@@ -56,14 +59,14 @@ public class Parser {
 		int deleteRow = getDeleteRow(parameters);
 		command.setDeleteRow(deleteRow);
 	}
-	private void createTaskWithParameters(String parameters){
+	public void createTaskWithParameters(String parameters){
 		Task task = new Task();
 		taskName = getTaskName(parameters);
 		task.setTask(taskName);
-		date = getDate(parameters);
-		task.setDate(date);
 		location = getLocation(parameters);
 		task.setLocation(location);
+		date = getDate(parameters);
+		task.setDate(date);
 		start = getStart(parameters);
 		task.setStart(start);
 		end = getEnd(parameters);
@@ -97,12 +100,12 @@ public class Parser {
 	}
 	private String getDate(String parameters){
 		String date = "";
-		date = parameters.substring(parameters.indexOf("on") + 2, parameters.indexOf("from") - 1);
+		date = parameters.substring(parameters.indexOf("on") + 3, parameters.indexOf("from") - 1);
 		return date;
 	}
 	private String getStart(String parameters){
 		String start = "";
-		start = parameters.substring(parameters.indexOf("from") + 4, parameters.indexOf("~"));
+		start = parameters.substring(parameters.indexOf("from") + 5, parameters.indexOf("~"));
 		return start;
 	}
 	private String getEnd(String parameters){
@@ -121,9 +124,44 @@ public class Parser {
 		return notification;
 	}
 	
+// the following methods are used for testing
 	
+	public String getTaskName(){
+		return taskName;
+	}
+	public String getLocation(){
+		return location;
+	}
+	public String getDate(){
+		return date;
+	}
 	
+	public String getStart(){
+		return start;
+	}
+	public String getEnd(){
+		return end;
+	}
+	public String getTag(){
+		return tag;
+	}
+	public String getNotification(){
+		return notification;
+	}
+	public int getDeleteRow(){
+		return command.getDeleteRow();
+	}
 	
-
+	public int getUpdateRow(){
+		return command.getUpdateRow();
+	}
+	
+	public String getUpdateType(){
+		return command.getUpdateType();
+	}
+	
+	public String getUpdateDetail(){
+		return command.getUpdateDetail();
+	}
 }
 
