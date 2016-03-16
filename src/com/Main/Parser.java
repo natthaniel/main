@@ -34,6 +34,7 @@ public class Parser {
 			break;
 
 		default:
+			System.out.println("Invalid command input");
 		}
 	}
 

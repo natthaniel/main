@@ -2,3 +2,5 @@ do laundry~~test~~tomorrow~~1200~~1300~~test~~test
 meeting TA~~test~~tomorrow~~0900~~1300~~test~~test
 cs tut~~shcool of computing~~16 march~~0900~~ 1100~~school~~bring v0.2
 house cleaning~~home~~17 mar~~1400 ~~ 1500~~housework~~buy new mop
+taskname~~loca1~~Mar 16~~1800 ~~1900~~school~~bring something
+finish coding~~soc~~mar 17~~1800~~ 2000~~school~~notes

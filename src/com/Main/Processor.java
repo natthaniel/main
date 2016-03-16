@@ -1,5 +1,5 @@
 package com.Main;
-
+import java.util.logging.*;
 import java.util.ArrayList;
 
 public class Processor {
@@ -12,7 +12,8 @@ public class Processor {
 	private static final String DISPLAY_TASK_NOTIFICATION_MESSAGE = "Notification:%1$s\r\n";
 	     
 	private TextFileSaver storage = new TextFileSaver();
-	TaskforUpdateFunction UpdatedTask;
+	private TaskforUpdateFunction UpdatedTask;
+	private static Logger ProcessorLogger = Logger.getLogger("Log of Processor");
 	
 	public Processor(){
 		UpdatedTask = new TaskforUpdateFunction();
@@ -21,6 +22,7 @@ public class Processor {
 	public String processCommand(String command){
 		Parser parser = new Parser(command);
 		String commandType = parser.getCommand().getCommandType();
+		assert(commandType != null);
 		switch (commandType){
 			case "add":
 				addTask(parser);
@@ -41,12 +43,23 @@ public class Processor {
 		String TypeToUpdate = parser.getCommand().getUpdateType();
 		String DetailToUpdate = parser.getCommand().getUpdateDetail();
 		ArrayList<Task> TaskList = storage.getTaskData();
-
-		UpdatedTask.setOldTask(TaskList.get(IndexForUpdate));
-		TaskList = executeUpdateRequest(IndexForUpdate, TypeToUpdate, DetailToUpdate, TaskList);
-		
-		UpdatedTask.setNewTask(TaskList.get(IndexForUpdate));
+		//IndexForUpdate = -1;
+		assert(IndexForUpdate >= 0);
+		assert(TypeToUpdate != null);
+		ProcessorLogger.log(Level.INFO, "gonna start to execute the update request");
+		try {
+			UpdatedTask.setOldTask(TaskList.get(IndexForUpdate));
+			TaskList = executeUpdateRequest(IndexForUpdate, TypeToUpdate, DetailToUpdate, TaskList);
+			
+			UpdatedTask.setNewTask(TaskList.get(IndexForUpdate));
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Invalid Task number detected, re-enter.");
+			//e.printStackTrace();
+			ProcessorLogger.log(Level.WARNING, "Update error: invalid Task reference number", e);
+		}
 		storage.saveFile(TaskList);
+		ProcessorLogger.log(Level.INFO, "update done and saved");
+
 		//displayOneTask(IndexForUpdate, TaskList);
 		
 		return UpdatedTask;
@@ -69,17 +82,33 @@ public class Processor {
 	private void addTask(Parser parser){
 		storage.readFile();
 		ArrayList<Task> TaskList = storage.getTaskData();
-		TaskList.add(parser.getCommand().getTask());
+		Task taskTobeAdded = parser.getCommand().getTask();
+		assert(taskTobeAdded != null);
 		
+		try {
+			TaskList.add(taskTobeAdded);
+		} catch (Exception e) {
+			System.out.println("task not added successfuly" + e.getMessage());
+			e.printStackTrace();
+			ProcessorLogger.log(Level.WARNING, "task not added successfuly", e);
+		}		
 		storage.saveFile(TaskList);
 	}
 	
 
 	private void deleteTask(Parser parser){
 		int indexForDeletion = parser.getCommand().getDeleteRow();
+		assert(indexForDeletion >= 0);	
 		ArrayList<Task> TaskList = storage.getTaskData();
-		TaskList.remove(indexForDeletion);
+		try {
+			TaskList.remove(indexForDeletion);
+			ProcessorLogger.log(Level.INFO, "deletion done successfully.");
+		} catch (IndexOutOfBoundsException e) {
+			ProcessorLogger.log(Level.WARNING, "Task not deleted successfully due to invalid index", e);
+			e.printStackTrace();
+		}
 		storage.saveFile(TaskList);
+		ProcessorLogger.log(Level.INFO, "deletion saved.");
 	}
 	
 
