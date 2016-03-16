@@ -32,7 +32,7 @@ public class Processor {
 				updateTask(parser);
 				return "update";
 			default:
-				return "";
+				throw new AssertionError(commandType);
 		}
 	}
 	
