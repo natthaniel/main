@@ -34,8 +34,12 @@ public class Processor {
 				updateTask(parameters);
 				return "update";//for GUI
 			default:
+<<<<<<< HEAD
 				System.out.
 				return "";
+=======
+				throw new AssertionError(commandType);
+>>>>>>> 6341efa2e8495886d21b63ea304ee8745e13f341
 		}
 	}
 	

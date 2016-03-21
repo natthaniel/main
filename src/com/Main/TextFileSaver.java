@@ -52,7 +52,7 @@ public class TextFileSaver {
 				FileWriter fileWriter = new FileWriter(file);
 				fileWriter.flush();
 				fileWriter.close();
-				System.out.println(fileName + " does not exists. New .txt file has been created");
+				System.out.println(fileName + " does not exists. New Record.txt file has been created");
 			}			
 			else{
 				//if file exists, read it into the arraylist fileData
@@ -69,13 +69,14 @@ public class TextFileSaver {
 		taskData = new ArrayList<Task>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
+			int lineReading = 1;
 			while((temp = br.readLine()) != null){
 				Task tempTask = new Task();
-				addToTaskList(temp, tempTask);
+				addToTaskList(temp, tempTask, lineReading);
+				lineReading++;
 			}	
 			br.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(fileName + " successfully read");
@@ -83,18 +84,23 @@ public class TextFileSaver {
 
 	/*Split the each line to 6 different segments. Each segment is separated in the .txt file by ~~. Add each
 	 * segment to tempTask for create a proper Task and add it to the Task ArrayList (taskData)*/
-	private void addToTaskList(String temp, Task tempTask) {
-		String[] _temp = new String[7];
-		_temp = temp.split("~~", -1);
-		tempTask.setTask(_temp[0]);
-		tempTask.setLocation(_temp[1]);
-		tempTask.setDate(_temp[2]);
-		tempTask.setStart(_temp[3]);
-		tempTask.setEnd(_temp[4]);
-		tempTask.setTag(_temp[5]);
-		tempTask.setNotification(_temp[6]);
-		taskData.add(tempTask);
-		_temp = null;
+	private void addToTaskList(String temp, Task tempTask, int lineReading) {
+		try {
+			String[] _temp = new String[7];
+			_temp = temp.split("~~", -1);
+			tempTask.setTask(_temp[0]);
+			tempTask.setLocation(_temp[1]);
+			tempTask.setDate(_temp[2]);
+			tempTask.setStart(_temp[3]);
+			tempTask.setEnd(_temp[4]);
+			tempTask.setTag(_temp[5]);
+			tempTask.setNotification(_temp[6]);
+			taskData.add(tempTask);
+			_temp = null;
+		} catch (Exception e) {
+			System.out.println("Incorrect data format in line " + lineReading + " in Record.txt and is ignored by software. ");// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void saveFile(ArrayList<Task> taskData){
