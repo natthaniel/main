@@ -2,6 +2,107 @@ package com.Main;
 
 public class Parser {
 
+	public Parser(){
+		
+	}
+	
+	public Commander parse(String input){
+		String command = getCommandFromInput(input);
+		input = input.substring(command.length());
+		switch(command){
+		case "add":
+			String[] addParameters = new String[7];
+			addParameters[0] = getTaskName(input);
+			addParameters[1] = getLocation(input);
+			addParameters[2] = getDate(input);
+			addParameters[3] = getStart(input);
+			addParameters[4] = getEnd(input);
+			addParameters[5] = getTag(input);
+			addParameters[6] = getNotification(input);
+			return new Add(addParameters);
+			
+		case "delete":
+			String deleteParameters[] = new String[1];
+			deleteParameters[0] = getDeleteRow(input);
+			return new Delete(deleteParameters);
+			
+		case "update":
+			String updateParameters[] = new String[3];
+			updateParameters[0] = getUpdateRow(input);
+			input = removeFirstWord(input);
+			updateParameters[1] = getNextWord(input);
+			input = removeFirstWord(input);
+			updateParameters[2] = input;
+			return new Update(updateParameters);
+		}
+	}
+	
+	private String getNextWord(String string){
+		String result = string.substring(0, string.indexOf(" "));
+		return result;
+	}
+	
+	private String removeFirstWord(String string){
+		String newString = string.substring(0, string.indexOf(" "));
+		return newString;
+	}
+	
+	private String getCommandFromInput(String string){
+		String command = string.substring(0,string.indexOf(" "));
+		return command;
+	}
+	
+	private String getUpdateRow(String parameters){
+		String updateRow;
+		updateRow = parameters.substring(0, parameters.indexOf(" ")); 
+		return updateRow;
+	}
+	
+	private String getDeleteRow(String parameters){
+		String deleteRow = parameters;
+		return deleteRow;
+	}
+	private String getTaskName(String parameters){
+		String taskName = "";
+		taskName = parameters.substring(0, parameters.indexOf("@") - 1);
+		return taskName;
+	}	
+	private String getLocation(String parameters){
+		String location = "";
+		location = parameters.substring(parameters.indexOf("@") + 1, parameters.indexOf("on") - 1);
+		return location;
+	}
+	private String getDate(String parameters){
+		String date = "";
+		date = parameters.substring(parameters.indexOf("on") + 3, parameters.indexOf("from") - 1);
+		return date;
+	}
+	private String getStart(String parameters){
+		String start = "";
+		start = parameters.substring(parameters.indexOf("from") + 5, parameters.indexOf("~"));
+		return start;
+	}
+	private String getEnd(String parameters){
+		String end = "";
+		end = parameters.substring(parameters.indexOf("~") + 1, parameters.indexOf("#") - 1);
+		return end;
+	}
+	private String getTag(String parameters){
+		String tag = "";
+		tag = parameters.substring(parameters.indexOf("#") + 1, parameters.indexOf("-") - 1);
+		return tag;
+	}
+	private String getNotification(String parameters){
+		String notification = "";
+		notification = parameters.substring(parameters.indexOf("-") + 1);
+		return notification;
+	}
+}
+
+
+/* Old parser code
+public class Parser {
+
 	private Command command;
 	private String taskName = "";
 	private String location = "";
@@ -38,9 +139,6 @@ public class Parser {
 		}
 	}
 
-	private void checkAndAddParameters(String parameters){
-		
-	}
 	public Command getCommand() {
 		return command;
 	}
@@ -79,51 +177,7 @@ public class Parser {
 		command.setTask(task);
 	}
 	
-	private int getUpdateRow(String parameters){
-		int updateRow;
-		updateRow = Integer.parseInt(parameters.substring(0, parameters.indexOf(" "))); 
-		return updateRow;
-	}
 	
-	private int getDeleteRow(String parameters){
-		int deleteRow = Integer.parseInt(parameters)-1;
-		return deleteRow;
-	}
-	private String getTaskName(String parameters){
-		String taskName = "";
-		taskName = parameters.substring(0, parameters.indexOf("@") - 1);
-		return taskName;
-	}	
-	private String getLocation(String parameters){
-		String location = "";
-		location = parameters.substring(parameters.indexOf("@") + 1, parameters.indexOf("on") - 1);
-		return location;
-	}
-	private String getDate(String parameters){
-		String date = "";
-		date = parameters.substring(parameters.indexOf("on") + 3, parameters.indexOf("from") - 1);
-		return date;
-	}
-	private String getStart(String parameters){
-		String start = "";
-		start = parameters.substring(parameters.indexOf("from") + 5, parameters.indexOf("~"));
-		return start;
-	}
-	private String getEnd(String parameters){
-		String end = "";
-		end = parameters.substring(parameters.indexOf("~") + 1, parameters.indexOf("#") - 1);
-		return end;
-	}
-	private String getTag(String parameters){
-		String tag = "";
-		tag = parameters.substring(parameters.indexOf("#") + 1, parameters.indexOf("-") - 1);
-		return tag;
-	}
-	private String getNotification(String parameters){
-		String notification = "";
-		notification = parameters.substring(parameters.indexOf("-") + 1);
-		return notification;
-	}
 	
 // the following methods are used for testing
 	
@@ -165,4 +219,4 @@ public class Parser {
 		return command.getUpdateDetail();
 	}
 }
-
+*/
