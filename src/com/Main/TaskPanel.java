@@ -50,6 +50,7 @@ public class TaskPanel extends JPanel {
 	private JTable table;
 	private DefaultTableModel model;
 	
+	//The constructor for task table
     public TaskPanel() {
         setLayout(new BorderLayout());
         setSize(new Dimension(600, 300));

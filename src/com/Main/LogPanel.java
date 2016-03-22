@@ -27,6 +27,7 @@ public class LogPanel extends JPanel{
     private JPanel logPanel;
     private JScrollPane scrollPanel; 
 	
+  //The constructor for log panel
 	public LogPanel(){
         setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(600, 300));
@@ -38,7 +39,7 @@ public class LogPanel extends JPanel{
 	
 		JPanel dummyPanel = new JPanel();
         dummyPanel.setBackground(new Color(0, 0, 0, 0));
-        logPanel.add(dummyPanel, mainGBC);
+        logPanel.add(dummyPanel, mainGBC);					//The dummy panel is for a trick
 		 
 		JLabel logItem = new JLabel("Welcome to TODO List!!");  
 		logItem.setBorder(new EmptyBorder(1, 10, 1, 10));                               
@@ -58,6 +59,8 @@ public class LogPanel extends JPanel{
 		repaint();
 	}
 	
+	
+	//console output for update command
 	public void displayUpdatedTask(TaskforUpdateFunction updatedTask){
 		Task oldTask = updatedTask.getOldTask();
 		Task newTask = updatedTask.getNewTask();

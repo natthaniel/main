@@ -77,7 +77,7 @@ public class HomeFrame extends JFrame{
 		home.setVisible(true);
 	}
 	
-	
+	// The Input bar initialization 
 	private JPanel userInputBar(){
     	JPanel panel = new JPanel();
         userInputBox = new JTextField(30);
