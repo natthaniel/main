@@ -47,7 +47,7 @@ public class LogicTest {
 
 	@Test
 	public void testDelete1() {
-		//try delete task No.1
+		//try delete task No.1, equivalence partitioning
 		Deleter testDelete = new Deleter(userInputDelete1, TaskList);
 		userInputDelete1 = new String[2];
 		userInputDelete1[0] = "delete";
@@ -58,7 +58,7 @@ public class LogicTest {
 
 	@Test
 	public void testDelete2() {
-		//try delete task No.-99
+		//try delete task No.-99, equivalence partitioning
 		Deleter testDelete = new Deleter(userInputDelete2, TaskList);
 		userInputDelete2 = new String[2];
 		userInputDelete2[0] = "delete";
@@ -69,6 +69,7 @@ public class LogicTest {
 
 	@Test
 	public void testAdd1(){
+		//equivalence partitioning
 		Adder testAdd = new Adder(userInputAdd1, TaskList);
 		userInputAdd1 = new String[7];
 		userInputAdd1[0] = "cs2103lecture";
@@ -78,13 +79,13 @@ public class LogicTest {
 		userInputAdd1[4] = "1800";
 		userInputAdd1[5] = "tag";
 		userInputAdd1[6] = "memo";
-		this.TaskList = TaskList;
 		String output = testAdd.execute();
 		assertEquals(output,"Task added successfully");
 	}
 	
 	@Test
 	public void testAdd2(){
+		//test on single  element
 		Adder testAdd = new Adder(userInputAdd2, TaskList);
 		userInputAdd2 = new String[7];
 		userInputAdd2[0] = "cs2103lecture";
@@ -100,6 +101,7 @@ public class LogicTest {
 
 	@Test
 	public void testUpdate1(){
+		//equivalence partitioning
 		Updater testUpdate = new Updater(userInputUpdate, TaskList);
 		userInputUpdate = new String[3];
 		userInputUpdate[0] = "1";
@@ -111,6 +113,7 @@ public class LogicTest {
 	
 	@Test
 	public void testUpdate2(){
+		//test for out of bound
 		Updater testUpdate = new Updater(userInputUpdate, TaskList);
 		userInputUpdate = new String[3];
 		userInputUpdate[0] = "-1";
