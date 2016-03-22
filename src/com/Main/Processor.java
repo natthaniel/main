@@ -10,7 +10,7 @@ public class Processor {
 	//private static Logger ProcessorLogger = Logger.getLogger("Log of Processor");
 	private Parser parserInst;
 
-	private Processor(){
+	public Processor(){
 		parserInst = new Parser();
 		storage = new TextFileSaver();
 		//Dispatcher.setTaskList(storage.getTaskData());

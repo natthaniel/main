@@ -92,12 +92,13 @@ public class HomeFrame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String userCommand = userInputBox.getText();
 				if (!userCommand.equals("")) {
-
-					String commandType = processor.processCommand(userCommand); 
+					String strToDisplay = processor.executeCommand(userCommand);
+					//String commandType = processor.processCommand(userCommand); 
 					taskList.upDateTaskList(processor);
 					
 					logPanel.recordToLog(MESSAGE_COMMAND + userCommand);
-					if (commandType == "update" || commandType == "delete" ||commandType == "add") {
+					logPanel.recordToLog(strToDisplay);
+					/*if (commandType == "update" || commandType == "delete" ||commandType == "add") {
 
 						if (commandType == "update"){
 							TaskforUpdateFunction UpdatedTask = processor.getUpdatedTask();
@@ -106,7 +107,7 @@ public class HomeFrame extends JFrame{
 						}
 					} else {
 						logPanel.recordToLog(MESSAGE_INVALID_COMMAND);
-					}
+					}*/
 					userInputBox.setText("");
 				}
 			}			
