@@ -25,7 +25,7 @@ public class InputBox extends JDialog{
 	public InputBox(JFrame homeFrame){
 		super(homeFrame, Dialog.ModalityType.DOCUMENT_MODAL);
 		jDialog = this;
-		this.setTitle("Add");
+		this.setTitle("Adder");
 		//jDialog.setSize(300, 200);
 		jDialog.setResizable(false);
 		jPanel = new JPanel(new GridBagLayout());

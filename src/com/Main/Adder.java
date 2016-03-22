@@ -3,11 +3,11 @@ package com.Main;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-public class Add implements Commander{
+public class Adder implements Commander{
 	private Task newTask;
 	ArrayList<Task> TaskList;
 	
-	public Add(String[] parsedUserInput, ArrayList<Task> TaskList) {
+	public Adder(String[] parsedUserInput, ArrayList<Task> TaskList) {
 		//The element of the string array will be in 
 		//0.taskName, 1.date 2.location 3.start 4.end 5.tag 6.notification
 		newTask.setTask(parsedUserInput[0]);

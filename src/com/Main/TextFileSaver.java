@@ -82,7 +82,7 @@ public class TextFileSaver {
 		System.out.println(fileName + " successfully read");
 	}
 
-	/*Split the each line to 6 different segments. Each segment is separated in the .txt file by ~~. Add each
+	/*Split the each line to 6 different segments. Each segment is separated in the .txt file by ~~. Adder each
 	 * segment to tempTask for create a proper Task and add it to the Task ArrayList (taskData)*/
 	private void addToTaskList(String temp, Task tempTask, int lineReading) {
 		try {

@@ -2,14 +2,14 @@ package com.Main;
 
 import java.util.ArrayList;
 
-public class Update implements Commander{
+public class Updater implements Commander{
 	
 	private int indexToUpdate;
 	private String sectionToUpdate;
 	private String detailToUpdate;
 	private ArrayList<Task> TaskList;
 	
-	public Update(String[] parsedUserInput, ArrayList<Task> TaskList){
+	public Updater(String[] parsedUserInput, ArrayList<Task> TaskList){
 		//The element of the string array will be in the following format
 		//0: indexToUpdate, 1: sectionToUpdate, 2: detailToUpdate
 		indexToUpdate = Integer.parseInt(parsedUserInput[0]);

@@ -87,7 +87,7 @@ public class Processor {
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.out.println("Invalid Task number detected, re-enter.");
 			//e.printStackTrace();
-			ProcessorLogger.log(Level.WARNING, "Update error: invalid Task reference number", e);
+			ProcessorLogger.log(Level.WARNING, "Updater error: invalid Task reference number", e);
 		}
 		storage.saveFile(TaskList);
 		ProcessorLogger.log(Level.INFO, "update done and saved");
