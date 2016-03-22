@@ -1,9 +1,12 @@
 package com.Main;
 
-public class Delete extends Dispatcher{
+import java.util.ArrayList;
+
+public class Delete implements Commander{
 	private int indexToDelete;
+	private ArrayList<Task> TaskList;
 	
-	public Delete(String[] parsedUserInput){
+	public Delete(String[] parsedUserInput, ArrayList<Task> TaskList){
 		//The first element in the array is the index to be deleted
 		indexToDelete = Integer.parseInt(parsedUserInput[0]);
 	}

@@ -1,17 +1,21 @@
 package com.Main;
 
-public class Update extends Dispatcher{
+import java.util.ArrayList;
+
+public class Update implements Commander{
 	
 	private int indexToUpdate;
 	private String sectionToUpdate;
 	private String detailToUpdate;
+	private ArrayList<Task> TaskList;
 	
-	public Update(String[] parsedUserInput){
+	public Update(String[] parsedUserInput, ArrayList<Task> TaskList){
 		//The element of the string array will be in the following format
 		//0: indexToUpdate, 1: sectionToUpdate, 2: detailToUpdate
 		indexToUpdate = Integer.parseInt(parsedUserInput[0]);
 		sectionToUpdate = parsedUserInput[1];
 		detailToUpdate = parsedUserInput[2];
+		this.TaskList = TaskList;
 	}
 	
 	@Override

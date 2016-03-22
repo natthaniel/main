@@ -1,11 +1,13 @@
 package com.Main;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 
-public class Add extends Dispatcher{
+public class Add implements Commander{
 	private Task newTask;
+	ArrayList<Task> TaskList;
 	
-	public Add(String[] parsedUserInput) {
+	public Add(String[] parsedUserInput, ArrayList<Task> TaskList) {
 		//The element of the string array will be in 
 		//0.taskName, 1.date 2.location 3.start 4.end 5.tag 6.notification
 		newTask.setTask(parsedUserInput[0]);
@@ -15,6 +17,7 @@ public class Add extends Dispatcher{
 		newTask.setEnd(parsedUserInput[4]);
 		newTask.setTag(parsedUserInput[5]);
 		newTask.setNotification(parsedUserInput[6]);
+		this.TaskList = TaskList;
 	}
 
 	@Override

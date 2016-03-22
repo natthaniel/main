@@ -1,12 +1,14 @@
 package com.Main;
 
+import java.util.ArrayList;
+
 public class Parser {
 
 	public Parser(){
 		
 	}
 	
-	public Dispatcher parse(String input){
+	public Commander parse(String input, ArrayList<Task> TaskList){
 		String command = getCommandFromInput(input);
 		input = input.substring(command.length());
 		switch(command){
@@ -19,12 +21,12 @@ public class Parser {
 			addParameters[4] = getEnd(input);
 			addParameters[5] = getTag(input);
 			addParameters[6] = getNotification(input);
-			return new Add(addParameters);
+			return new Add(addParameters, TaskList);
 			
 		case "delete":
 			String deleteParameters[] = new String[1];
 			deleteParameters[0] = getDeleteRow(input);
-			return new Delete(deleteParameters);
+			return new Delete(deleteParameters, TaskList);
 			
 		case "update":
 			String updateParameters[] = new String[3];
@@ -33,7 +35,7 @@ public class Parser {
 			updateParameters[1] = getNextWord(input);
 			input = removeFirstWord(input);
 			updateParameters[2] = input;
-			return new Update(updateParameters);
+			return new Update(updateParameters, TaskList);
 		}
 		return null;
 	}

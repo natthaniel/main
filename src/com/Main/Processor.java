@@ -13,11 +13,11 @@ public class Processor {
 	private Processor(){
 		parserInst = new Parser();
 		storage = new TextFileSaver();
-		Dispatcher.setTaskList(storage.getTaskData());
+		//Dispatcher.setTaskList(storage.getTaskData());
 	}
 	
 	public String executeCommand(String userInput){
-		Commander commanderInst = parserInst.parse(userInput);
+		Commander commanderInst = parserInst.parse(userInput, storage.getTaskData());
 		return commanderInst.execute();
 	}
 	
