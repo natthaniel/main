@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class Adder implements Commander{
-	private Task newTask;
+	private Task newTask = new Task();
 	ArrayList<Task> TaskList;
 	
 	public Adder(String[] parsedUserInput, ArrayList<Task> TaskList) {
 		//The element of the string array will be in 
-		//0.taskName, 1.date 2.location 3.start 4.end 5.tag 6.notification
+		//0.taskName, 1.location 2.date 3.start 4.end 5.tag 6.notification
 		newTask.setTask(parsedUserInput[0]);
-		newTask.setDate(parsedUserInput[1]);
-		newTask.setLocation(parsedUserInput[2]);
+		newTask.setLocation(parsedUserInput[1]);
+		newTask.setDate(parsedUserInput[2]);
 		newTask.setStart(parsedUserInput[3]);
 		newTask.setEnd(parsedUserInput[4]);
 		newTask.setTag(parsedUserInput[5]);

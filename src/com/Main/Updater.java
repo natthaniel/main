@@ -12,7 +12,7 @@ public class Updater implements Commander{
 	public Updater(String[] parsedUserInput, ArrayList<Task> TaskList){
 		//The element of the string array will be in the following format
 		//0: indexToUpdate, 1: sectionToUpdate, 2: detailToUpdate
-		indexToUpdate = Integer.parseInt(parsedUserInput[0]);
+		indexToUpdate = Integer.parseInt(parsedUserInput[0])-1; //-1 to make it usable to the user, as array start from 0 but task id starts from 1
 		sectionToUpdate = parsedUserInput[1];
 		detailToUpdate = parsedUserInput[2];
 		this.TaskList = TaskList;

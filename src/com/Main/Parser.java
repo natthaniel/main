@@ -10,7 +10,7 @@ public class Parser {
 	
 	public Commander parse(String input, ArrayList<Task> TaskList){
 		String command = getCommandFromInput(input);
-		input = input.substring(command.length());
+		input = input.substring(command.length()+1);
 		switch(command){
 		case "add":
 			String[] addParameters = new String[7];
@@ -40,62 +40,62 @@ public class Parser {
 		return null;
 	}
 	
-	private String getNextWord(String string){
+	public String getNextWord(String string){
 		String result = string.substring(0, string.indexOf(" "));
 		return result;
 	}
 	
-	private String removeFirstWord(String string){
-		String newString = string.substring(0, string.indexOf(" "));
+	public String removeFirstWord(String string){
+		String newString = string.substring(string.indexOf(" ")+1);
 		return newString;
 	}
 	
-	private String getCommandFromInput(String string){
+	public String getCommandFromInput(String string){
 		String command = string.substring(0,string.indexOf(" "));
 		return command;
 	}
 	
-	private String getUpdateRow(String parameters){
+	public String getUpdateRow(String parameters){
 		String updateRow;
 		updateRow = parameters.substring(0, parameters.indexOf(" ")); 
 		return updateRow;
 	}
 	
-	private String getDeleteRow(String parameters){
+	public String getDeleteRow(String parameters){
 		String deleteRow = parameters;
 		return deleteRow;
 	}
-	private String getTaskName(String parameters){
+	public String getTaskName(String parameters){
 		String taskName = "";
 		taskName = parameters.substring(0, parameters.indexOf("@") - 1);
 		return taskName;
 	}	
-	private String getLocation(String parameters){
+	public String getLocation(String parameters){
 		String location = "";
-		location = parameters.substring(parameters.indexOf("@") + 1, parameters.indexOf("on") - 1);
+		location = parameters.substring(parameters.indexOf("@") + 2, parameters.indexOf("on") - 1);
 		return location;
 	}
-	private String getDate(String parameters){
+	public String getDate(String parameters){
 		String date = "";
 		date = parameters.substring(parameters.indexOf("on") + 3, parameters.indexOf("from") - 1);
 		return date;
 	}
-	private String getStart(String parameters){
+	public String getStart(String parameters){
 		String start = "";
 		start = parameters.substring(parameters.indexOf("from") + 5, parameters.indexOf("~"));
 		return start;
 	}
-	private String getEnd(String parameters){
+	public String getEnd(String parameters){
 		String end = "";
 		end = parameters.substring(parameters.indexOf("~") + 1, parameters.indexOf("#") - 1);
 		return end;
 	}
-	private String getTag(String parameters){
+	public String getTag(String parameters){
 		String tag = "";
 		tag = parameters.substring(parameters.indexOf("#") + 1, parameters.indexOf("-") - 1);
 		return tag;
 	}
-	private String getNotification(String parameters){
+	public String getNotification(String parameters){
 		String notification = "";
 		notification = parameters.substring(parameters.indexOf("-") + 1);
 		return notification;
