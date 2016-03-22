@@ -65,6 +65,7 @@ public class TextFileSaver {
 
 	public void readFile(){
 		String temp;
+		String readSuccess = "";
 		file = new File(fileName);
 		taskData = new ArrayList<Task>();
 		try {
@@ -72,7 +73,7 @@ public class TextFileSaver {
 			int lineReading = 1;
 			while((temp = br.readLine()) != null){
 				Task tempTask = new Task();
-				addToTaskList(temp, tempTask, lineReading);
+				readSuccess = addToTaskList(temp, tempTask, lineReading);
 				lineReading++;
 			}	
 			br.close();
@@ -84,7 +85,7 @@ public class TextFileSaver {
 
 	/*Split the each line to 6 different segments. Each segment is separated in the .txt file by ~~. Adder each
 	 * segment to tempTask for create a proper Task and add it to the Task ArrayList (taskData)*/
-	private void addToTaskList(String temp, Task tempTask, int lineReading) {
+	public String addToTaskList(String temp, Task tempTask, int lineReading) {
 		try {
 			String[] _temp = new String[7];
 			_temp = temp.split("~~", -1);
@@ -97,9 +98,13 @@ public class TextFileSaver {
 			tempTask.setNotification(_temp[6]);
 			taskData.add(tempTask);
 			_temp = null;
+			return "success";
 		} catch (Exception e) {
-			System.out.println("Incorrect data format in line " + lineReading + ": " + temp + " in Record.txt and is ignored by software. Please rectify before using to prevent loss of data.");// TODO Auto-generated catch block
+			System.out.println("Incorrect data format in line " + lineReading + ": " + temp 
+					           + " in Record.txt and is ignored by software. Please rectify before "
+				               + "using to prevent loss of data.");
 			e.printStackTrace();
+			return "failed";
 		}
 	}
 	
@@ -126,14 +131,14 @@ public class TextFileSaver {
 	}
 
 	/*Convert the string arrays into a single string with proper formatting before saving*/
-	private String processIntoSingleStringForSaving(String tempSave,
+	public String processIntoSingleStringForSaving(String tempSave,
 			String[] taskToString) {
 		tempSave = tempSave + taskToString[0] + "~~" + taskToString[1] + "~~" + taskToString[2] + "~~"+ taskToString[3] + "~~"+ taskToString[4] + "~~"+ taskToString[5]+ "~~" + taskToString[6] + "\n";
 		return tempSave;
 	}
 	
 	/*Convert the task into a string array*/
-	private void convertTaskToString(Task tempTaskForSaving,
+	public void convertTaskToString(Task tempTaskForSaving,
 			String[] taskToString) {
 		taskToString[0] = tempTaskForSaving.getTaskName();
 		taskToString[1] = tempTaskForSaving.getLocation();
