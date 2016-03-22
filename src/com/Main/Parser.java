@@ -72,7 +72,7 @@ public class Parser {
 	}	
 	public String getLocation(String parameters){
 		String location = "";
-		location = parameters.substring(parameters.indexOf("@") + 2, parameters.indexOf("on") - 1);
+		location = parameters.substring(parameters.indexOf("@") + 1, parameters.indexOf("on") - 1);
 		return location;
 	}
 	public String getDate(String parameters){

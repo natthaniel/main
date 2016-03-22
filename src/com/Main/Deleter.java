@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Deleter implements Commander{
 	private int indexToDelete;
 	private ArrayList<Task> TaskList;
+	private String taskDeleted;
 	
 	public Deleter(String[] parsedUserInput, ArrayList<Task> TaskList){
 		//The first element in the array is the index to be deleted
@@ -15,13 +16,14 @@ public class Deleter implements Commander{
 	public String execute() {
 		try{
 		//assert(indexToDelete >=0);
+		taskDeleted = TaskList.get(indexToDelete-1).getTaskName() + " on " + TaskList.get(indexToDelete-1).getDate();
 		TaskList.remove(indexToDelete-1);
 		} catch (Exception e){
 			e.printStackTrace();
 			return e.toString();
 		}
 		
-		return "Task deleted successfully";
+		return "Task " + indexToDelete + ": " + taskDeleted + " deleted successfully";
 	}
 
 }

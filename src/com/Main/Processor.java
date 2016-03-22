@@ -9,6 +9,7 @@ public class Processor {
 	//private TaskforUpdateFunction UpdatedTask;
 	//private static Logger ProcessorLogger = Logger.getLogger("Log of Processor");
 	private Parser parserInst;
+	private String message = "";
 
 	public Processor(){
 		parserInst = new Parser();
@@ -18,7 +19,9 @@ public class Processor {
 	
 	public String executeCommand(String userInput){
 		Commander commanderInst = parserInst.parse(userInput, storage.getTaskData());
-		return commanderInst.execute();
+		message = commanderInst.execute();
+		storage.saveFile();
+		return message; 
 	}
 	
 	

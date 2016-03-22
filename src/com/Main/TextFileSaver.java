@@ -98,13 +98,12 @@ public class TextFileSaver {
 			taskData.add(tempTask);
 			_temp = null;
 		} catch (Exception e) {
-			System.out.println("Incorrect data format in line " + lineReading + " in Record.txt and is ignored by software. ");// TODO Auto-generated catch block
+			System.out.println("Incorrect data format in line " + lineReading + ": " + temp + " in Record.txt and is ignored by software. Please rectify before using to prevent loss of data.");// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void saveFile(ArrayList<Task> taskData){
-		this.taskData = taskData;
+	public void saveFile(){
 		FileWriter savefile;
 		try {
 			String tempSave = "";
