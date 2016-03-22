@@ -5,44 +5,37 @@ import java.util.ArrayList;
 
 public class Processor {
 		     
-	private TextFileSaver storage = new TextFileSaver();
-	private TaskforUpdateFunction UpdatedTask;
-	private static Logger ProcessorLogger = Logger.getLogger("Log of Processor");
-	//private Parser = new Parser();
+	private TextFileSaver storage;
+	//private TaskforUpdateFunction UpdatedTask;
+	//private static Logger ProcessorLogger = Logger.getLogger("Log of Processor");
+	private Parser parserInst;
+
 	private Processor(){
-		UpdatedTask = new TaskforUpdateFunction();
+		parserInst = new Parser();
+		storage = new TextFileSaver();
+		Dispatcher.setTaskList(storage.getTaskData());
 	}
 	
-	public String processCommand(String command){
-		Parser parser = new Parser(command);
-		//parse.parse(command.substr(after commandType))
-		String commandType = parser.getCommandType();
-		String[] parameters = parser.getParameters(commandType);
-		
-		assert(commandType != null);
-		switch (commandType){
-			case "add":
-				
-				addTask(parameters);//create a new task and put in parameters
-				return "add";//for GUI
-			case "delete":
-				
-				deleteTask(parameters);
-				return "delete";//for GUI
-			case "update":
-				
-				updateTask(parameters);
-				return "update";//for GUI
-			default:
-<<<<<<< HEAD
-				System.out.
-				return "";
-=======
-				throw new AssertionError(commandType);
->>>>>>> 6341efa2e8495886d21b63ea304ee8745e13f341
-		}
+	public String executeCommand(String userInput){
+		Commander commanderInst = parserInst.parse(userInput);
+		return commanderInst.execute();
 	}
 	
+	
+	public TextFileSaver getStorage(){
+		return storage;
+	}
+	
+	public void readFile(){
+		storage.readFile();
+	}
+	
+}
+/*
+	
+	public TaskforUpdateFunction getUpdatedTask(){
+		return UpdatedTask;
+	}
 	
 	private void addTask(Parser parser){
 		storage.readFile();
@@ -75,6 +68,7 @@ public class Processor {
 		storage.saveFile(TaskList);
 		ProcessorLogger.log(Level.INFO, "deletion saved.");
 	}
+		
 	
 	private TaskforUpdateFunction updateTask(Parser parser) {
 		int IndexForUpdate = parser.getCommand().getUpdateRow() - 1;
@@ -103,49 +97,6 @@ public class Processor {
 		return UpdatedTask;
 	}
 
-	
-	private ArrayList<Task> executeUpdateRequest(int IndexForUpdate, String TypeToUpdate, String DetailToUpdate,
-			ArrayList<Task> TaskList) {
-		switch (TypeToUpdate.toLowerCase()){
-		case "task":
-			TaskList.get(IndexForUpdate).setTask(DetailToUpdate);
-			break;
-		case "location":
-			TaskList.get(IndexForUpdate).setLocation(DetailToUpdate);
-			break;
-		case "date":
-			TaskList.get(IndexForUpdate).setDate(DetailToUpdate);
-			break;
-		case "start":
-			TaskList.get(IndexForUpdate).setStart(DetailToUpdate);
-			break;
-		case "end":
-			TaskList.get(IndexForUpdate).setEnd(DetailToUpdate);
-			break;
-		case "tag":
-			TaskList.get(IndexForUpdate).setTag(DetailToUpdate);
-			break;
-		case "notification":
-			TaskList.get(IndexForUpdate).setNotification(DetailToUpdate);
-			break;
-		default:
-			System.out.println("Keyword for the type of detail is invalid.");
-		}
-		return TaskList;
-	}
-	
-	public TextFileSaver getStorage(){
-		return storage;
-	}
-	
-	public TaskforUpdateFunction getUpdatedTask(){
-		return UpdatedTask;
-	}
-	
-	public void readFile(){
-		storage.readFile();
-	}
-	
 	private String displayOneTask(int indexForUpdate, ArrayList<Task> taskList) {
 		StringBuilder TaskToShow = new StringBuilder();
 		TaskToShow.append(String.format(DISPLAY_TASK_TITLE_MESSAGE, taskList.get(indexForUpdate).getTaskName()));
@@ -168,3 +119,6 @@ public class Processor {
 	private static final String DISPLAY_TASK_TAG_MESSAGE = "Tag:%1$s\r\n";
 	private static final String DISPLAY_TASK_NOTIFICATION_MESSAGE = "Notification:%1$s\r\n";
 }
+	
+
+	*/

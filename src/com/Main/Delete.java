@@ -14,6 +14,7 @@ public class Delete extends Dispatcher{
 		TaskList.remove(indexToDelete);
 		} catch (Exception e){
 			e.printStackTrace();
+			return e.toString();
 		}
 		
 		return "Task deleted successfully";

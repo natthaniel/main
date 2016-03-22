@@ -6,7 +6,7 @@ public class Parser {
 		
 	}
 	
-	public Commander parse(String input){
+	public Dispatcher parse(String input){
 		String command = getCommandFromInput(input);
 		input = input.substring(command.length());
 		switch(command){
@@ -35,6 +35,7 @@ public class Parser {
 			updateParameters[2] = input;
 			return new Update(updateParameters);
 		}
+		return null;
 	}
 	
 	private String getNextWord(String string){

@@ -16,30 +16,45 @@ public class Update extends Dispatcher{
 	
 	@Override
 	public String execute() {
+		Task taskToUpdate;
 		switch(sectionToUpdate.toLowerCase()){
 		case "task":
-			TaskList.get(indexToUpdate).setTask(detailToUpdate);
+			taskToUpdate =TaskList.get(indexToUpdate);
+			taskToUpdate.setTask(detailToUpdate);
+			TaskList.set(indexToUpdate, taskToUpdate);
 			break;
 		case "location":
-			TaskList.get(indexToUpdate).setLocation(detailToUpdate);
+			taskToUpdate =TaskList.get(indexToUpdate);
+			taskToUpdate.setLocation(detailToUpdate);
+			TaskList.set(indexToUpdate, taskToUpdate);
 			break;
 		case "date":
-			TaskList.get(indexToUpdate).setDate(detailToUpdate);
+			taskToUpdate =TaskList.get(indexToUpdate);
+			taskToUpdate.setDate(detailToUpdate);
+			TaskList.set(indexToUpdate, taskToUpdate);
 			break;
 		case "start":
-			TaskList.get(indexToUpdate).setStart(detailToUpdate);
+			taskToUpdate =TaskList.get(indexToUpdate);
+			taskToUpdate.setStart(detailToUpdate);
+			TaskList.set(indexToUpdate, taskToUpdate);
 			break;
 		case "end":
-			TaskList.get(indexToUpdate).setEnd(detailToUpdate);
+			taskToUpdate =TaskList.get(indexToUpdate);
+			taskToUpdate.setEnd(detailToUpdate);
+			TaskList.set(indexToUpdate, taskToUpdate);
 			break;
 		case "tag":
-			TaskList.get(indexToUpdate).setTag(detailToUpdate);
+			taskToUpdate =TaskList.get(indexToUpdate);
+			taskToUpdate.setTag(detailToUpdate);
+			TaskList.set(indexToUpdate, taskToUpdate);
 			break;
 		case "notification":
-			TaskList.get(indexToUpdate).setNotification(detailToUpdate);
+			taskToUpdate =TaskList.get(indexToUpdate);
+			taskToUpdate.setNotification(detailToUpdate);
+			TaskList.set(indexToUpdate, taskToUpdate);
 			break;
 		default:
-			System.out.println("Keyword for the type of detail is invalid.");
+			return "Keyword for the type of detail is invalid.";
 		}
 				
 		return "Task was updated successfully";
