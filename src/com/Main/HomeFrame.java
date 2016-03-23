@@ -28,6 +28,7 @@ public class HomeFrame extends JFrame{
 	
 	// Instance attributes used in this example
 	//private	JPanel mainPanel;
+
 	private	LogPanel logPanel;
 	private TaskPanel taskList;
 	private JTextField userInputBox;
