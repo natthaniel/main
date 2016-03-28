@@ -111,7 +111,7 @@ public class Parser {
 		return deleteRow;
 	}
 
-	public String getTaskName(String parameters) {
+/*	public String getTaskName(String parameters) {
 		String taskName = "";
 		taskName = parameters.substring(0, parameters.indexOf("@") - 1);
 		return taskName;
@@ -152,6 +152,7 @@ public class Parser {
 		notification = parameters.substring(parameters.indexOf("-") + 1);
 		return notification;
 	}
+*/	
 }
 
 /*
