@@ -73,6 +73,11 @@ public class Parser {
 			input = removeFirstWord(input);
 			updateParameters[2] = input;
 			return new Updater(updateParameters, TaskList);
+		
+		case "search":
+			String searchParameters[] = new String[1];
+			searchParameters[0] = input;
+			return new Searcher(searchParameters, TaskList);
 		}
 		return null;
 	}
