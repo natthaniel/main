@@ -18,12 +18,13 @@ public class Deleter implements Commander{
 		//assert(indexToDelete >=0);
 		taskDeleted = TaskList.get(indexToDelete-1).getTaskName() + " on " + TaskList.get(indexToDelete-1).getDate();
 		TaskList.remove(indexToDelete-1);
+		return "Task deleted successfully";
 		} catch (Exception e){
 			e.printStackTrace();
 			return e.toString();
 		}
 		
-		return "Task " + indexToDelete + ": " + taskDeleted + " deleted successfully";
+		//return "Task " + indexToDelete + ": " + taskDeleted + " deleted successfully";
 	}
 
 }

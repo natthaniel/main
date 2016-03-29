@@ -2,12 +2,12 @@ package com.Main;
 
 import java.util.ArrayList;
 
-public class Searcher implements Commander {
+public class SearcherByKeyword implements Commander {
 	private String keyWord;
 	private String matchDetails;
 	private ArrayList<Task> TaskList;
 
-	public Searcher(String[] parsedUserInput, ArrayList<Task> TaskList){
+	public SearcherByKeyword(String[] parsedUserInput, ArrayList<Task> TaskList){
 		//The 1st element in the string array is the keyword for search
 		keyWord = parsedUserInput[0];
 		this.TaskList = TaskList;

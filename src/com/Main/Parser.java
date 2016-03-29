@@ -77,7 +77,7 @@ public class Parser {
 		case "search":
 			String searchParameters[] = new String[1];
 			searchParameters[0] = input;
-			return new Searcher(searchParameters, TaskList);
+			return new SearcherByKeyword(searchParameters, TaskList);
 		}
 		return null;
 	}

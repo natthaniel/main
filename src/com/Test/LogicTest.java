@@ -125,7 +125,7 @@ public class LogicTest {
 
 	//@Test
 	public void testSearch(){
-		//Searcher  testSearch = 
+		//SearcherByKeyword  testSearch = 
 		userInputSearch = new String [1];
 		userInputSearch[0] = "laptop";
 	}
