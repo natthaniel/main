@@ -62,6 +62,50 @@ public class TextFileSaver {
 			e.printStackTrace();
 			}
 	}
+	
+	public TextFileSaver(String fileName){
+		taskData = new ArrayList<Task>();
+		//Attempt to locate file. Create new file if file does not exist
+		if(fileName.length()>0){
+		this.fileName = fileName;
+		try {
+			file = new File(fileName);			
+			if(!file.exists()) { 
+			    // if file not exist, create a new .txt file with same file name
+				FileWriter fileWriter = new FileWriter(file);
+				fileWriter.flush();
+				fileWriter.close();
+				System.out.println(fileName + " does not exists. New " + fileName + " file has been created");
+			}			
+			else{
+				//if file exists, read it into the arraylist fileData
+				readFile();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			}
+		}
+		else{
+			this.fileName = "Record.txt";
+			try {
+				file = new File(fileName);			
+				if(!file.exists()) { 
+				    // if file not exist, create a new .txt file with same file name
+					FileWriter fileWriter = new FileWriter(file);
+					fileWriter.flush();
+					fileWriter.close();
+					System.out.println(fileName + " does not exists. New Record.txt file has been created");
+				}			
+				else{
+					//if file exists, read it into the arraylist fileData
+					readFile();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				}
+			
+		}
+	}
 
 	public void readFile(){
 		String temp;

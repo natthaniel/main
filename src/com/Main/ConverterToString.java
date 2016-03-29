@@ -24,7 +24,7 @@ public class ConverterToString {
 	}
 	public ConverterToString(ArrayList<Task> SomeTasksToConvert){
 		if(SomeTasksToConvert == null){
-			System.out.println("Empty tasks");
+			System.out.println("Empty taskList");
 		}
 		taskIns = null;
 		taskList = SomeTasksToConvert;
@@ -39,14 +39,14 @@ public class ConverterToString {
 	}
 	private String convertSingleTask(){
 		StringBuilder TaskToShow = new StringBuilder();
-		TaskToShow.append(String.format(DISPLAY_TASK_TITLE_MESSAGE, taskIns.getTaskName()));
-		TaskToShow.append(String.format(DISPLAY_TASK_DATE_MESSAGE, taskIns.getDate()));
-		TaskToShow.append(String.format(DISPLAY_TASK_LOCATION_MESSAGE, taskIns.getLocation()));
-		TaskToShow.append(String.format(DISPLAY_TASK_START_MESSAGE, taskIns.getStart()));
-		TaskToShow.append(String.format(DISPLAY_TASK_END_MESSAGE, taskIns.getEnd()));
-		TaskToShow.append(String.format(DISPLAY_TASK_TAG_MESSAGE, taskIns.getTag()));
-		TaskToShow.append(String.format(DISPLAY_TASK_NOTIFICATION_MESSAGE, taskIns.getNotification()));
-		
+		TaskToShow.append(String.format(DISPLAY_TASK_TITLE_MESSAGE, taskIns.getTaskName())+System.lineSeparator());
+		TaskToShow.append(String.format(DISPLAY_TASK_DATE_MESSAGE, taskIns.getDate())+System.lineSeparator());
+		TaskToShow.append(String.format(DISPLAY_TASK_LOCATION_MESSAGE, taskIns.getLocation())+System.lineSeparator());
+		TaskToShow.append(String.format(DISPLAY_TASK_START_MESSAGE, taskIns.getStart())+System.lineSeparator());
+		TaskToShow.append(String.format(DISPLAY_TASK_END_MESSAGE, taskIns.getEnd())+System.lineSeparator());
+		TaskToShow.append(String.format(DISPLAY_TASK_TAG_MESSAGE, taskIns.getTag())+System.lineSeparator());
+		TaskToShow.append(String.format(DISPLAY_TASK_NOTIFICATION_MESSAGE, taskIns.getNotification())+System.lineSeparator());
+		TaskToShow.append(System.lineSeparator());
 		return TaskToShow.toString();
 	}
 	private String convertSomeTasks(){
@@ -54,17 +54,17 @@ public class ConverterToString {
 		for(int i = 0; i < taskList.size(); i++){
 			taskIns = taskList.get(i);
 			String singleTask = convertSingleTask();
-			TasksToShow.append(singleTask);
+			TasksToShow.append(singleTask+System.lineSeparator());
 		}
 		return TasksToShow.toString();		
 	}
 	
 	
-	private static final String DISPLAY_TASK_TITLE_MESSAGE = "Title:%1$s\r\n";
-	private static final String DISPLAY_TASK_DATE_MESSAGE = "Date:%1$s\r\n";
-	private static final String DISPLAY_TASK_LOCATION_MESSAGE = "Location:%1$s\r\n";
-	private static final String DISPLAY_TASK_START_MESSAGE = "Start:%1$s\r\n";
-	private static final String DISPLAY_TASK_END_MESSAGE = "End:%1$s\r\n";
-	private static final String DISPLAY_TASK_TAG_MESSAGE = "Tag:%1$s\r\n";
-	private static final String DISPLAY_TASK_NOTIFICATION_MESSAGE = "Notification:%1$s\r\n";
+	private static final String DISPLAY_TASK_TITLE_MESSAGE = "Title:%1$s";
+	private static final String DISPLAY_TASK_DATE_MESSAGE = "Date:%1$s";
+	private static final String DISPLAY_TASK_LOCATION_MESSAGE = "Location:%1$s";
+	private static final String DISPLAY_TASK_START_MESSAGE = "Start:%1$s";
+	private static final String DISPLAY_TASK_END_MESSAGE = "End:%1$s";
+	private static final String DISPLAY_TASK_TAG_MESSAGE = "Tag:%1$s";
+	private static final String DISPLAY_TASK_NOTIFICATION_MESSAGE = "Notification:%1$s";
 }
