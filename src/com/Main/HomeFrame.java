@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -96,7 +97,7 @@ public class HomeFrame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String userCommand = userInputBox.getText();
 				if (!userCommand.equals("")) {
-					ArrayList<String> strToDisplay = processor.executeCommand(userCommand);
+					List<String> strToDisplay = processor.executeCommand(userCommand);
 					//String commandType = processor.processCommand(userCommand); 
 					taskList.upDateTaskList(processor);
 					

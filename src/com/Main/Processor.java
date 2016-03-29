@@ -2,6 +2,8 @@ package com.Main;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;  
 
 public class Processor {
 		     
@@ -22,13 +24,16 @@ public class Processor {
 		//Dispatcher.setTaskList(storage.getTaskData());
 	}
 	
-	public ArrayList<String> executeCommand(String userInput){
+	public List<String> executeCommand(String userInput){
 		Commander commanderInst = parserInst.parse(userInput, storage.getTaskData());
 		message = commanderInst.execute();
 		storage.saveFile();
-		messageThread.add(message);
+		String[] array = message.split(System.lineSeparator());
+		//messageThread.add(message);
+		//messageThread
+		List<String> output = Arrays.asList(array);
 		//return message;
-		return messageThread;
+		return output;
 	}
 	
 	

@@ -47,7 +47,7 @@ public class ConverterToString {
 		TaskToShow.append(String.format(DISPLAY_TASK_TAG_MESSAGE, taskIns.getTag())+System.lineSeparator());
 		TaskToShow.append(String.format(DISPLAY_TASK_NOTIFICATION_MESSAGE, taskIns.getNotification())+System.lineSeparator());
 		TaskToShow.append(System.lineSeparator());
-		return TaskToShow.toString();
+		return TaskToShow.toString(); 
 	}
 	private String convertSomeTasks(){
 		StringBuilder TasksToShow = new StringBuilder();
