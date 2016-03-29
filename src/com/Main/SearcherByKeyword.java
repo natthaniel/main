@@ -37,11 +37,17 @@ public class SearcherByKeyword implements Commander {
 						if (currentTask.getNotification().contains(keyWord)){
 							searchResultList.add(currentTask);
 						}
+						else {
+							if (currentTask.getTag().contains(keyWord)){
+								searchResultList.add(currentTask);
+							}
+						}
 					}
 				}
+
 			}
-			ConverterToString output = new ConverterToString(searchResultList);
-			return output.convert();
 		}
+		ConverterToString output = new ConverterToString(searchResultList);
+		return output.convert();
 	}
 }
