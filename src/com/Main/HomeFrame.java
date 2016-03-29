@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -95,13 +96,16 @@ public class HomeFrame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String userCommand = userInputBox.getText();
 				if (!userCommand.equals("")) {
-					String strToDisplay = processor.executeCommand(userCommand);
+					ArrayList<String> strToDisplay = processor.executeCommand(userCommand);
 					//String commandType = processor.processCommand(userCommand); 
 					taskList.upDateTaskList(processor);
 					
 					logPanel.clearLog();
 					logPanel.recordToLog(HTML_HEAD+setStringInRed(MESSAGE_COMMAND) + userCommand+HTML_TAIL);
-					logPanel.recordToLog(HTML_HEAD+strToDisplay+HTML_TAIL);
+					for (int i=0; i<strToDisplay.size(); i++) {
+						
+						logPanel.recordToLog(HTML_HEAD+strToDisplay.get(i)+HTML_TAIL);
+					}
 					/*if (commandType == "update" || commandType == "delete" ||commandType == "add") {
 
 						if (commandType == "update"){
