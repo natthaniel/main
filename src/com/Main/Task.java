@@ -40,6 +40,9 @@ public class Task {
 		}
 		endCal.setTime(date);
 	}
+	public GregorianCalendar getStartCal() {
+		return startCal;
+	}
 	
 	public Task(){
 	}
