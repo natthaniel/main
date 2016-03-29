@@ -46,8 +46,9 @@ public class SearcherByKeyword implements Commander {
 				}
 
 			}
+			ConverterToString output = new ConverterToString(searchResultList);
+			return output.convert();
 		}
-		ConverterToString output = new ConverterToString(searchResultList);
-		return output.convert();
+
 	}
 }
