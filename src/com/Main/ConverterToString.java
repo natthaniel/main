@@ -54,7 +54,7 @@ public class ConverterToString {
 		for(int i = 0; i < taskList.size(); i++){
 			taskIns = taskList.get(i);
 			String singleTask = convertSingleTask();
-			TasksToShow.append(singleTask);
+			TasksToShow.append(singleTask+System.lineSeparator());
 		}
 		return TasksToShow.toString();		
 	}

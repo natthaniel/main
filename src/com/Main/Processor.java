@@ -10,6 +10,11 @@ public class Processor {
 	//private static Logger ProcessorLogger = Logger.getLogger("Log of Processor");
 	private Parser parserInst;
 	private String message = "";
+	public ArrayList<String> messageThread = new ArrayList<String>();
+
+	public ArrayList<String> getMessageThread() {
+		return messageThread;
+	}
 
 	public Processor(){
 		parserInst = new Parser();
@@ -17,11 +22,13 @@ public class Processor {
 		//Dispatcher.setTaskList(storage.getTaskData());
 	}
 	
-	public String executeCommand(String userInput){
+	public ArrayList<String> executeCommand(String userInput){
 		Commander commanderInst = parserInst.parse(userInput, storage.getTaskData());
 		message = commanderInst.execute();
 		storage.saveFile();
-		return message; 
+		messageThread.add(message);
+		//return message;
+		return messageThread;
 	}
 	
 	
