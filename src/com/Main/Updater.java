@@ -39,18 +39,22 @@ public class Updater implements Commander{
 			detailChanged = TaskList.get(indexToUpdate).getDate();
 			taskToUpdate =TaskList.get(indexToUpdate);
 			taskToUpdate.setDate(detailToUpdate);
+			taskToUpdate.setCalendar();
 			TaskList.set(indexToUpdate, taskToUpdate);
+			
 			break;
 		case "start":
 			detailChanged = TaskList.get(indexToUpdate).getStart();
 			taskToUpdate =TaskList.get(indexToUpdate);
 			taskToUpdate.setStart(detailToUpdate);
+			taskToUpdate.setCalendar();
 			TaskList.set(indexToUpdate, taskToUpdate);
 			break;
 		case "end":
 			detailChanged = TaskList.get(indexToUpdate).getEnd();
 			taskToUpdate =TaskList.get(indexToUpdate);
 			taskToUpdate.setEnd(detailToUpdate);
+			taskToUpdate.setCalendar();
 			TaskList.set(indexToUpdate, taskToUpdate);
 			break;
 		case "tag":
