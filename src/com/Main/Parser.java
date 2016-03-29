@@ -43,6 +43,10 @@ public class Parser {
 					addParameters[i] = addParameters[i].substring(tokens[i-1].length() + 1);
 				}
 			}
+			if (addParameters[2] != null){
+				addParameters[2] = addParameters[2].trim();
+			}
+			
 			return new Adder(addParameters,TaskList);
 			
 			
@@ -75,9 +79,25 @@ public class Parser {
 			return new Updater(updateParameters, TaskList);
 		
 		case "search":
-			String searchParameters[] = new String[1];
-			searchParameters[0] = input;
-			return new SearcherByKeyword(searchParameters, TaskList);
+			String[] searchType = input.split(" ");
+			switch(searchType[0]){
+			case "d": //by date
+				String searchDateParameters[] = new String[1];
+				input = removeFirstWord(input);
+				searchDateParameters[0] = input;
+				return new SearcherByDate(searchDateParameters, TaskList);
+			/*
+			 	case "f": //by free slot
+				String searchFreeParameters[] = new String[1];
+				return new SearcherForFreeTimeSlot(searchFreeParameters, TaskList);
+			*/	
+			default: //by keyword
+				String searchParameters[] = new String[1];
+				searchParameters[0] = input;
+				return new SearcherByKeyword(searchParameters, TaskList);
+			}
+			
+			
 		}
 		return null;
 	}
