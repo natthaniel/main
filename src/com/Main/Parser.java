@@ -43,7 +43,10 @@ public class Parser {
 					addParameters[i] = addParameters[i].substring(tokens[i-1].length() + 1);
 				}
 			}
-			addParameters[2] = addParameters[2].trim();
+			if (addParameters[2] != null){
+				addParameters[2] = addParameters[2].trim();
+			}
+			
 			return new Adder(addParameters,TaskList);
 			
 			
