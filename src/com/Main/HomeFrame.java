@@ -38,6 +38,8 @@ public class HomeFrame extends JFrame{
 	
 	private static final String MESSAGE_INVALID_COMMAND = "Invalid command.";
 	private static final String MESSAGE_COMMAND = "Command: ";
+	private static final String HTML_HEAD = "<HTML>";
+	private static final String HTML_TAIL = "</HTML>";
 
 	// Constructor of main frame
 	public HomeFrame()
@@ -97,8 +99,9 @@ public class HomeFrame extends JFrame{
 					//String commandType = processor.processCommand(userCommand); 
 					taskList.upDateTaskList(processor);
 					
-					logPanel.recordToLog(MESSAGE_COMMAND + userCommand);
-					logPanel.recordToLog(strToDisplay);
+					logPanel.clearLog();
+					logPanel.recordToLog(HTML_HEAD+setStringInRed(MESSAGE_COMMAND) + userCommand+HTML_TAIL);
+					logPanel.recordToLog(HTML_HEAD+strToDisplay+HTML_TAIL);
 					/*if (commandType == "update" || commandType == "delete" ||commandType == "add") {
 
 						if (commandType == "update"){
@@ -118,9 +121,25 @@ public class HomeFrame extends JFrame{
         
     }   	
 	
-	
-	public void taskUpdatedWindow(TaskforUpdateFunction UpdatedTask){
-		JFrame taskUpdatedWindow = new JFrame("Task Updated");
-		
+	public String setStringInGreen(String outputStr){
+		outputStr = "<font color=\"green\">" + outputStr + "</font>";
+		return outputStr;
 	}
+	
+	public String setStringInRed(String outputStr){
+		outputStr = "<font color=\"red\">" + outputStr + "</font>";
+		return outputStr;
+	}
+	
+	public String setStringInBlue(String outputStr){
+		outputStr = "<font color=\"blue\">" + outputStr + "</font>";
+		return outputStr;
+	}
+	
+	public String setStringWithRGB(String outputStr, String r, String g, String b){
+		outputStr = "<font color=\"rgb("+r+", "+g+", "+b+")\">" + outputStr + "</font>";
+		return outputStr;
+	}
+	
+	
 }

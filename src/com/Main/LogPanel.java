@@ -2,12 +2,14 @@ package com.Main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -26,6 +28,8 @@ public class LogPanel extends JPanel{
     private String MESSAGE_WELCOME = "Welcome to TODO List!!";
     private JPanel logPanel;
     private JScrollPane scrollPanel; 
+    
+    private ArrayList<Component> logList= new ArrayList<Component>();
 	
   //The constructor for log panel
 	public LogPanel(){
@@ -44,6 +48,7 @@ public class LogPanel extends JPanel{
 		JLabel logItem = new JLabel("Welcome to TODO List!!");  
 		logItem.setBorder(new EmptyBorder(1, 10, 1, 10));                               
 		logPanel.add(logItem, tasksGBC, 0);
+		logList.add(logItem);
 		
 		scrollPanel = new JScrollPane(logPanel);
 		counter++;
@@ -51,10 +56,18 @@ public class LogPanel extends JPanel{
         add(scrollPanel, BorderLayout.CENTER);
 	}
 	
+	public void clearLog(){
+		for (int i=0; i<logList.size(); i++){
+			logPanel.remove(logList.get(i));
+		}
+		counter=0;
+	}
+	
 	public void recordToLog(String userCommand){
 		JLabel logItem = new JLabel(userCommand); 
 		logItem.setBorder(new EmptyBorder(1, 10, 1, 10));
 		logPanel.add(logItem, tasksGBC, counter++);
+		logList.add(logItem);
 		validate();
 		repaint();
 	}
