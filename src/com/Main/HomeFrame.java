@@ -16,6 +16,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -85,6 +86,8 @@ public class HomeFrame extends JFrame{
 	// The Input bar initialization 
 	private JPanel userInputBar(){
     	JPanel panel = new JPanel();
+        JLabel textInputLabel = new JLabel("User Command: ");
+        panel.add(textInputLabel);
         userInputBox = new JTextField(30);
         panel.add(userInputBox);
         enterButton = new JButton("Enter");
