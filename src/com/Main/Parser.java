@@ -42,6 +42,9 @@ public class Parser {
 				if (addParameters[i]!=null){
 					addParameters[i] = addParameters[i].substring(tokens[i-1].length() + 1);
 				}
+				else{
+					addParameters[i] = " ";
+				}
 			}
 			if (addParameters[2] != null){
 				addParameters[2] = addParameters[2].trim();
