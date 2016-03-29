@@ -10,8 +10,8 @@ import java.util.ArrayList;
  */
 public class SearcherByKeyword implements Commander {
 	private String keyWord;
-	private String matchDetails;
 	private ArrayList<Task> TaskList;
+	private ArrayList<Task> searchResultList= new ArrayList<Task>();
 
 	public SearcherByKeyword(String[] parsedUserInput, ArrayList<Task> TaskList){
 		//The 1st element in the string array is the keyword for search
@@ -21,19 +21,27 @@ public class SearcherByKeyword implements Commander {
 
 	@Override
 	public String execute() {
+		keyWord = keyWord.trim();
 		if (TaskList.size() == 0) {
 			return "TodoList is empty";
 		} else {
-			//keyWord = ;
-			keyWord = keyWord.trim();
-
-			for (int i = 0; i < TaskList.size(); i++) {
-				if ((TaskList).contains(keyWord.toUpperCase())) {
-					return "The matching details are as follows: " + matchDetails;
+			for (Task currentTask : TaskList){
+				if (currentTask.getTaskName().contains(keyWord)){
+					searchResultList.add(currentTask);
+				}
+				else {
+					if (currentTask.getLocation().contains(keyWord)){
+						searchResultList.add(currentTask);
+					}
+					else {
+						if (currentTask.getNotification().contains(keyWord)){
+							searchResultList.add(currentTask);
+						}
+					}
 				}
 			}
-
+			ConverterToString output = new ConverterToString(searchResultList);
+			return output.convert();
 		}
-		return matchDetails;
 	}
 }
