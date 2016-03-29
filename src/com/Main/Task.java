@@ -17,6 +17,7 @@ public class Task {
 	private String notification = "";
 	private GregorianCalendar startCal = new GregorianCalendar();
 	private GregorianCalendar endCal = new GregorianCalendar();
+	boolean isTaskDone = false;
 /*
  * http://stackoverflow.com/questions/4216745/java-string-to-date-conversion
  */
@@ -73,6 +74,10 @@ public class Task {
 	public String getNotification() {
 		return notification;
 	}
+	
+	public boolean getTaskDone(){
+		return isTaskDone;
+	}
 
 	public void setTask(String taskName) {
 		this.taskName = taskName;
@@ -102,7 +107,13 @@ public class Task {
 		this.notification = notification;
 	}
 	
+	public void setTaskAsDone(){
+		this.isTaskDone = true;
+	}
 	
+	public void setTaskAsUndone(){
+		this.isTaskDone = false;
+	}
 }
 
 /*
