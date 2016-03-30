@@ -7,8 +7,8 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;  
 
+import com.GUI.HomeFrame;
 import com.Main.Adder;
-import com.Main.HomeFrame;
 
 public class UITesting {
 	
