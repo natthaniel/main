@@ -1,5 +1,7 @@
 package com.Main;
 
+import static org.junit.Assert.*;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,6 +13,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -26,6 +29,8 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import org.junit.Test;
 
 public class HomeFrame extends JFrame{
 	
@@ -44,6 +49,8 @@ public class HomeFrame extends JFrame{
 	private static final String HTML_HEAD = "<HTML>";
 	private static final String HTML_TAIL = "</HTML>";
 
+	
+	
 	// Constructor of main frame
 	public HomeFrame()
 	{		
@@ -78,7 +85,7 @@ public class HomeFrame extends JFrame{
 	
 	public static void main(String[] args){
 		HomeFrame home = new HomeFrame();
-		
+		home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		home.taskListInitialize();
 		home.setVisible(true);
 	}
@@ -99,35 +106,41 @@ public class HomeFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String userCommand = userInputBox.getText();
-				if (!userCommand.equals("")) {
-					List<String> strToDisplay = processor.executeCommand(userCommand);
-					//String commandType = processor.processCommand(userCommand); 
-					taskList.upDateTaskList(processor);
-					
-					logPanel.clearLog();
-					logPanel.recordToLog(HTML_HEAD+setStringInRed(MESSAGE_COMMAND) + userCommand+HTML_TAIL);
-					for (int i=0; i<strToDisplay.size(); i++) {
-						
-						logPanel.recordToLog(HTML_HEAD+strToDisplay.get(i)+HTML_TAIL);
-					}
-					/*if (commandType == "update" || commandType == "delete" ||commandType == "add") {
-
-						if (commandType == "update"){
-							TaskforUpdateFunction UpdatedTask = processor.getUpdatedTask();
-							logPanel.displayUpdatedTask(UpdatedTask);				
-							
-						}
-					} else {
-						logPanel.recordToLog(MESSAGE_INVALID_COMMAND);
-					}*/
-					userInputBox.setText("");
-				}
+				
 			}			
     	});  
         
         return panel;
         
     }   	
+	
+	public List<String> commandEntered(String userCommand){
+		if (!userCommand.equals("")) {
+			List<String> strToDisplay = processor.executeCommand(userCommand);
+			//String commandType = processor.processCommand(userCommand); 
+			taskList.upDateTaskList(processor);
+			
+			logPanel.clearLog();
+			logPanel.recordToLog(HTML_HEAD+setStringInRed(MESSAGE_COMMAND) + userCommand+HTML_TAIL);
+			for (int i=0; i<strToDisplay.size(); i++) {
+				
+				logPanel.recordToLog(HTML_HEAD+strToDisplay.get(i)+HTML_TAIL);
+			}
+			/*if (commandType == "update" || commandType == "delete" ||commandType == "add") {
+
+				if (commandType == "update"){
+					TaskforUpdateFunction UpdatedTask = processor.getUpdatedTask();
+					logPanel.displayUpdatedTask(UpdatedTask);				
+					
+				}
+			} else {
+				logPanel.recordToLog(MESSAGE_INVALID_COMMAND);
+			}*/
+			userInputBox.setText("");
+			return strToDisplay;
+		}
+		return null;
+	}
 	
 	public String setStringInGreen(String outputStr){
 		outputStr = "<font color=\"green\">" + outputStr + "</font>";

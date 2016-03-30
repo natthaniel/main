@@ -49,6 +49,7 @@ public class TaskPanel extends JPanel {
 	Object rowData[][] = {};
 	private JTable table;
 	private DefaultTableModel model;
+	private String imgLink = "";
 	
 	//The constructor for task table
     public TaskPanel() {
@@ -97,7 +98,7 @@ public class TaskPanel extends JPanel {
     protected void paintComponent(Graphics g) {
     	super.paintComponent(g);
 		try {
-	        g.drawImage(ImageIO.read(this.getClass().getResource("background.png")), 0, 0, null);
+	        g.drawImage(ImageIO.read(this.getClass().getResource("background.png")), 0, 0, null);  //background.png
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
