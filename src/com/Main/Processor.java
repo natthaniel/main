@@ -22,6 +22,9 @@ public class Processor {
 		parserInst = new Parser();
 		storage = new TextFileSaver();
 		//Dispatcher.setTaskList(storage.getTaskData());
+		for (int i = 0; i < storage.getTaskData().size(); i++ ){
+			storage.getTaskData().get(i).setCalendar();
+		}
 	}
 	
 	public List<String> executeCommand(String userInput){
