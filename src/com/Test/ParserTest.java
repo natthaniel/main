@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 
 public class ParserTest {
 	
-	@Test
-	public void addTest(){
+//	@Test
+/*	public void addTest(){
 		Parser parser= new Parser();
 		String string = "task @ loc on date from start~end #tag -notification";
 		String task = parser.getTaskName(string);
@@ -26,6 +26,49 @@ public class ParserTest {
 		String notification = parser.getNotification(string);
 		assertEquals(notification, "notification");
 	}
+*/
+	@Test
+	public void testRemoveWord(){
+		Parser parser = new Parser();
+		String string = "remove this";
+		string = parser.removeFirstWord(string);
+		assertEquals(string, "this");
+	}
+	
+	@Test
+	public void testGetNextWord(){
+		Parser parser = new Parser();
+		String string = "this is the string";
+		string = parser.getNextWord(string);
+		assertEquals(string, "this");
+	}
+	@Test public void testGetTokenLoc(){
+		Parser parser = new Parser();
+		String containsToken = "token is @";
+		int containsLoc = parser.getTokenLoc(containsToken, "@");
+		assertEquals(containsLoc, 9);
+		
+		String doesNotContainToken = "token is not found";
+		int doesNotContainLoc = parser.getTokenLoc(doesNotContainToken, "@");
+		assertEquals(doesNotContainLoc, -1);
+	}
+	
+	@Test
+	public void testGetCommandFromInput(){
+		Parser parser = new Parser();
+		String addInput = "add this is the string input";
+		String addCommand = parser.getCommandFromInput(addInput);
+		assertEquals(addCommand, "add");
+		
+		String delInput = "delete 3";
+		String delCommand = parser.getCommandFromInput(delInput);
+		assertEquals(delCommand, "delete");
+		
+		String updateInput = "update 3 location here";
+		String updateCommand = parser.getCommandFromInput(updateInput);
+		assertEquals(updateCommand, "update");
+	}
+
 	@Test
 	public void updateTest(){
 		Parser parser = new Parser();
