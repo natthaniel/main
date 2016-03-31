@@ -17,8 +17,16 @@ public class UITesting {
 		HomeFrame homeFrame = new HomeFrame();
 		String array[] = {"Task added successfully"};
 		List<String> expectedList = Arrays.asList(array);
-		homeFrame.taskListInitialize();
-		assertEquals(expectedList, homeFrame.commandEntered("add task @ RC4 on 11 02 2016 from 1100 ~ 1200")); 
+		assertEquals(expectedList, homeFrame.passingCommand("add task @ RC4 on 11 02 2016 from 1100 ~ 1200")); 
+		//Testing under the condition that when TaskList is empty.	
+	}
+	
+	@Test
+	public void executeTest2() {
+		HomeFrame homeFrame = new HomeFrame();
+		String array[] = {"Task added successfully"};
+		List<String> expectedList = Arrays.asList(array);
+		assertEquals(expectedList, homeFrame.passingCommand("add task @ RC4 on 11 02 2016 from 1100 ~ 1200")); 
 		//Testing under the condition that when TaskList is empty.	
 	}
 }
