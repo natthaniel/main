@@ -42,8 +42,9 @@ public class HomeFrame extends JFrame{
 	//private	JPanel mainPanel;
 
 	private	LogPanel logPanel;
-	private TaskPanel toDoTaskList;
-	private TaskPanel taskDoneList;
+	private TaskPanel eventTaskList;
+	private TaskPanel floatingTaskList;
+	private TaskPanel deadlineTaskList;
 	private JTextField userInputBox;
 	private JSplitPane mainPanel;
 	private Processor processor;
@@ -77,12 +78,14 @@ public class HomeFrame extends JFrame{
 
 		taskPanel= new JTabbedPane();
 		
-		toDoTaskList = new TaskPanel();
+		eventTaskList = new TaskPanel();
 		ArrayList<Task> fileData = processor.getStorage().getTaskData();
-		toDoTaskList.upDateTaskList(fileData);
-		taskPanel.add("Tasks To Do", toDoTaskList);
-		taskDoneList = new TaskPanel();
-		taskPanel.add("Tasks Done", taskDoneList);
+		eventTaskList.upDateTaskList(fileData);
+		taskPanel.add("Event Task", eventTaskList);
+		floatingTaskList = new TaskPanel();
+		taskPanel.add("Floating Task", floatingTaskList);
+		deadlineTaskList = new TaskPanel();
+		taskPanel.add("Deadline Task", deadlineTaskList);
 		
 		mainPanel.setRightComponent(taskPanel );	
 		
@@ -129,7 +132,7 @@ public class HomeFrame extends JFrame{
 		if (!userCommand.equals("")) {
 			List<String> strToDisplay = processor.executeCommand(userCommand);
 			//String commandType = processor.processCommand(userCommand); 
-			toDoTaskList.upDateTaskList(processor.getStorage().getTaskData());
+			eventTaskList.upDateTaskList(processor.getStorage().getTaskData());
 			
 			logPanel.clearLog();
 			logPanel.recordToLog(HTML_HEAD+setStringInRed(MESSAGE_COMMAND) + userCommand+HTML_TAIL);
