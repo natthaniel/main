@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import com.Main.Adder;
+import com.Main.Commander;
+import com.Main.ConverterToString;
+import com.Main.Parser;
 import com.Main.Task;
 
 
@@ -65,5 +68,52 @@ public class AdderTest {
 		//Testing under the condition that when it throws Null Pointer Exception
 		
 	}
+	
+	@Test// Integration Testing with Parser with no flexibility of User input
+	public void excuteTestWithParser(){
+		Parser parserInst = new Parser();
+		String userInput = "add taskName @ location on date from start~end #tag -notification";
+		Commander commanderInst = parserInst.parse(userInput, TaskList);
+		actualOutput = commanderInst.execute();
+		assertEquals("", "Task added successfully", actualOutput); 
+	}
+	
+	@Test// Integration Testing with Parser with no Location
+	public void excuteTestWithParserNoLocation(){
+		Parser parserInst = new Parser();
+		String userInput = "add taskName on date from start~end #tag -notification";
+		Commander commanderInst = parserInst.parse(userInput, TaskList);
+		actualOutput = commanderInst.execute();
+		assertEquals("", "Task added successfully", actualOutput); 
+	}
+	
+	@Test// Integration Testing with Parser with no tag and notification
+	public void excuteTestWithParserNoTagNoNotice(){
+		Parser parserInst = new Parser();
+		String userInput = "add taskName @ location on date from start~end";
+		Commander commanderInst = parserInst.parse(userInput, TaskList);
+		actualOutput = commanderInst.execute();
+		assertEquals("", "Task added successfully", actualOutput); 
+	}
+	
+	@Test// Integration Testing with Parser with no Starting time
+	public void excuteTestWithParserDeadline(){
+		Parser parserInst = new Parser();
+		String userInput = "add taskName on date ~ end #tag -notification";
+		Commander commanderInst = parserInst.parse(userInput, TaskList);
+		actualOutput = commanderInst.execute();
+		assertEquals("", "Task added successfully", actualOutput); 
+	}
+	
+	@Test// Integration Testing with Parser with no Task Name
+	public void excuteTestWithParserNoTaskName(){
+		Parser parserInst = new Parser();
+		String userInput = "add  on date from start~end #tag -notification";
+		Commander commanderInst = parserInst.parse(userInput, TaskList);
+		actualOutput = commanderInst.execute();
+		
+		assertEquals("", "Task added successfully", actualOutput); 
+	}
 
+	
 }

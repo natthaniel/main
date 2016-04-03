@@ -29,7 +29,7 @@ public class Task {
 			date = formatter.parse(getDate() + " " + getStart()); // String to Date object
 		} catch (ParseException e) {
 			//e.printStackTrace();
-			System.out.println("date object is not successfully parsed from its string counterpart" + e.getMessage());
+			//System.out.println("date object is not successfully parsed from its string counterpart" + e.getMessage());
 		}
 		startCal.setTime(date);
 		
@@ -37,7 +37,7 @@ public class Task {
 			date = formatter.parse(getDate() + " " + getEnd()); // String to Date object
 		} catch (ParseException e) {
 			//e.printStackTrace();
-			System.out.println("date object is not successfully parsed from its string counterpart" + e.getMessage());
+			//System.out.println("date object is not successfully parsed from its string counterpart" + e.getMessage());
 		}
 		endCal.setTime(date);
 	}
