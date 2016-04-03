@@ -107,18 +107,20 @@ public class Parser {
 			}
 		
 		// display today/tomorrow/week/all/done/undone
-		case "display":
+		/*
+		 	case "display":
 			String[] displayParameters = new String[1];
 			displayParameters[0] = input;
 			return new Displayer(displayParameters, TaskList);
-			
+		*/	
 		// switch deadline/event/float
 		
+			/*
 		case "switch":
 			String[] switchParameters = new String[1];
 			switchParameters[0] = input;
 			return new Switcher(switchParameters, TaskList);
-			
+		*/	
 			
 			
 		}
