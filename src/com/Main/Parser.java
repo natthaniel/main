@@ -12,7 +12,8 @@ public class Parser {
 		String command = getCommandFromInput(input);
 		input = input.substring(command.length() + 1);
 		switch (command) {
-		// add taskName @ location on date from start~end #tag -notification
+		// add <String taskName> @ <String location> on <Date date> from <String start> ~ <String end> # <String tag> - <String notification>
+		//taskName is a compulsory parameter, all other parameters are optional
 		case "add":
 			String[] tokens = {"@", "on", "from", "~", "#", "-"};
 			int[] tokenLoc = new int[8];
@@ -67,11 +68,13 @@ public class Parser {
 			 return new Adder(addParameters,TaskList);
 			 */
 
+		// delete <int taskNumber>
 		case "delete":
 			String deleteParameters[] = new String[1];
 			deleteParameters[0] = getDeleteRow(input);
 			return new Deleter(deleteParameters, TaskList);
 
+		// update <int taskNumber> <String detailType> <String newDetail>
 		case "update":
 			String updateParameters[] = new String[3];
 			updateParameters[0] = getUpdateRow(input);
@@ -81,6 +84,8 @@ public class Parser {
 			updateParameters[2] = input;
 			return new Updater(updateParameters, TaskList);
 		
+		// search <String keyword>
+		// search d <Date date>
 		case "search":
 			String[] searchType = input.split(" ");
 			switch(searchType[0]){
@@ -95,10 +100,25 @@ public class Parser {
 				return new SearcherForFreeTimeSlot(searchFreeParameters, TaskList);
 			*/	
 			default: //by keyword
+				// String searchParameters = input.split(" ");
 				String searchParameters[] = new String[1];
 				searchParameters[0] = input;
 				return new SearcherByKeyword(searchParameters, TaskList);
 			}
+		
+		// display today/tomorrow/week/all/done/undone
+		case "display":
+			String[] displayParameters = new String[1];
+			displayParameters[0] = input;
+			return new Displayer(displayParameters, TaskList);
+			
+		// switch deadline/event/float
+		
+		case "switch":
+			String[] switchParameters = new String[1];
+			switchParameters[0] = input;
+			return new Switcher(switchParameters, TaskList);
+			
 			
 			
 		}
