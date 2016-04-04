@@ -1,3 +1,4 @@
+//@@author a0116764b
 package com.Main;
 
 import java.util.ArrayList;
@@ -12,61 +13,58 @@ public class Parser {
 		String command = getCommandFromInput(input);
 		input = input.substring(command.length() + 1);
 		switch (command) {
-		// add <String taskName> @ <String location> on <Date date> from <String start> ~ <String end> # <String tag> - <String notification>
-		//taskName is a compulsory parameter, all other parameters are optional
+		// add <String taskName> @ <String location> on <Date date> from <String
+		// start> ~ <String end> # <String tag> - <String notification>
+		// taskName is a compulsory parameter, all other parameters are optional
 		case "add":
-			String[] tokens = {"@", "on", "from", "~", "#", "-"};
+			String[] tokens = { "@", "on", "from", "~", "#", "-" };
 			int[] tokenLoc = new int[8];
 			tokenLoc[0] = 0; // start of string
-			
+
 			for (int i = 0; i < tokens.length; i++) {
-			 tokenLoc[i + 1] = getTokenLoc(input, tokens[i]);
+				tokenLoc[i + 1] = getTokenLoc(input, tokens[i]);
 			}
 			tokenLoc[7] = input.length(); // end of the string
 
-			String[] addParameters = new String[7]; // 0 = task name, 1 = loc, 2 = date, 3 = start, 4 = end, 5 = tag, 6 = notification
-			
+			String[] addParameters = new String[7]; // 0 = task name, 1 = loc, 2
+													// = date, 3 = start, 4 =
+													// end, 5 = tag, 6 =
+													// notification
+
 			for (int i = 0; i < addParameters.length; i++) {
-				 int startIndex = tokenLoc[i];
-				 if (startIndex == -1) { // token not used
-				  continue;
-				 }
-				 int j = i + 1;
-				 while (tokenLoc[j] == -1) { 
-				  j++;
-				 }
-				 int endIndex = tokenLoc[j];
-				 addParameters[i] = input.substring(startIndex, endIndex);
+				int startIndex = tokenLoc[i];
+				if (startIndex == -1) { // token not used
+					continue;
 				}
-			
-			for (int i = 1; i < 7; i++){
-				if (addParameters[i]!=null){
-					addParameters[i] = addParameters[i].substring(tokens[i-1].length() + 1);
+				int j = i + 1;
+				while (tokenLoc[j] == -1) {
+					j++;
 				}
-				else{
+				int endIndex = tokenLoc[j];
+				addParameters[i] = input.substring(startIndex, endIndex);
+			}
+
+			for (int i = 1; i < 7; i++) {
+				if (addParameters[i] != null) {
+					addParameters[i] = addParameters[i].substring(tokens[i - 1].length() + 1);
+				} else {
 					addParameters[i] = " ";
 				}
 			}
-			if (addParameters[2] != null){
+			if (addParameters[2] != null) {
 				addParameters[2] = addParameters[2].trim();
 			}
-			
-			return new Adder(addParameters,TaskList);
-			
-			
 
-			/*
-			 case "add": 
-			 String[] addParameters = new String[7];
-			 addParameters[0] = getTaskName(input); 
-			 addParameters[1] = getLocation(input); 
-			 addParameters[2] = getDate(input);
-			 addParameters[3] = getStart(input); 
-			 addParameters[4] = getEnd(input); 
-			 addParameters[5] = getTag(input); 
-			 addParameters[6] = getNotification(input); 
-			 return new Adder(addParameters,TaskList);
-			 */
+			return new Adder(addParameters, TaskList);
+
+		/*
+		 * case "add": String[] addParameters = new String[7]; addParameters[0]
+		 * = getTaskName(input); addParameters[1] = getLocation(input);
+		 * addParameters[2] = getDate(input); addParameters[3] =
+		 * getStart(input); addParameters[4] = getEnd(input); addParameters[5] =
+		 * getTag(input); addParameters[6] = getNotification(input); return new
+		 * Adder(addParameters,TaskList);
+		 */
 
 		// delete <int taskNumber>
 		case "delete":
@@ -83,50 +81,46 @@ public class Parser {
 			input = removeFirstWord(input);
 			updateParameters[2] = input;
 			return new Updater(updateParameters, TaskList);
-		
+
 		// search <String keyword>
 		// search d <Date date>
 		case "search":
 			String[] searchType = input.split(" ");
-			switch(searchType[0]){
-			case "d": //by date
+			switch (searchType[0]) {
+			case "d": // by date
 				String searchDateParameters[] = new String[1];
 				input = removeFirstWord(input);
 				searchDateParameters[0] = input;
 				return new SearcherByDate(searchDateParameters, TaskList);
 			/*
-			 	case "f": //by free slot
-				String searchFreeParameters[] = new String[1];
-				return new SearcherForFreeTimeSlot(searchFreeParameters, TaskList);
-			*/	
-			default: //by keyword
+			 * case "f": //by free slot String searchFreeParameters[] = new
+			 * String[1]; return new
+			 * SearcherForFreeTimeSlot(searchFreeParameters, TaskList);
+			 */
+			default: // by keyword
 				String[] searchParameters = input.split(" ");
-				//String searchParameters[] = new String[1];
-				//searchParameters[0] = input;
+				// String searchParameters[] = new String[1];
+				// searchParameters[0] = input;
 				return new SearcherByKeyword(searchParameters, TaskList);
 			}
-		
-		// display today/tomorrow/week/all/done/undone
-/*		
-		 	case "display":
-			String[] displayParameters = new String[1];
-			displayParameters[0] = input;
-			return new Displayer(displayParameters, TaskList);
-*/			
-		// switch deadline/event/float
-/*		
-		case "switch":
-			String[] switchParameters = new String[1];
-			switchParameters[0] = input;
-			return new Switcher(switchParameters, TaskList);	
-*/		
-		// do <taskNumber>
-/*
-		case "do":
-			String[] doParameters = new String[1];
-			doParameters[0] = getDoRow(input);
-			return Doer(doParameters, TaskList);
-*/
+
+			// display today/tomorrow/week/all/done/undone
+			/*
+			 * case "display": String[] displayParameters = new String[1];
+			 * displayParameters[0] = input; return new
+			 * Displayer(displayParameters, TaskList);
+			 */
+			// switch deadline/event/float
+			/*
+			 * case "switch": String[] switchParameters = new String[1];
+			 * switchParameters[0] = input; return new
+			 * Switcher(switchParameters, TaskList);
+			 */
+			// do <taskNumber>
+			/*
+			 * case "do": String[] doParameters = new String[1]; doParameters[0]
+			 * = getDoRow(input); return Doer(doParameters, TaskList);
+			 */
 		}
 		return null;
 	}
@@ -164,13 +158,14 @@ public class Parser {
 		String deleteRow = parameters;
 		return deleteRow;
 	}
-	
-	public String getDoRow(String parameters){
+
+	public String getDoRow(String parameters) {
 		String doRow = parameters;
 		return doRow;
 	}
 
-/*	public String getTaskName(String parameters) {
+	// @@author a0116764b-unused
+	public String getTaskName(String parameters) {
 		String taskName = "";
 		taskName = parameters.substring(0, parameters.indexOf("@") - 1);
 		return taskName;
@@ -211,68 +206,131 @@ public class Parser {
 		notification = parameters.substring(parameters.indexOf("-") + 1);
 		return notification;
 	}
-*/	
-}
-
+}	
+//@@author a0116764b-unused
+// Old parser code, before overhaul in architecture
 /*
- * Old parser code public class Parser {
- * 
- * private Command command; private String taskName = ""; private String
- * location = ""; private String date = ""; private String start = ""; private
- * String end = ""; private String tag = ""; private String notification = "";
- * 
- * public Parser(String cmd) { command = new Command(); String commandType =
- * cmd.substring(0, cmd.indexOf(" ")); String parameters =
- * cmd.substring(cmd.indexOf(" ") + 1); command.setCommandType(commandType);
- * switch (commandType) {
- * 
- * // add task @location on date from 1230~1300 #tag -notification case "add":
- * createTaskWithParameters(parameters); break;
- * 
- * // delete taskNumber case "delete": processDelete(parameters); break;
- * 
- * // update taskNumber detailType newValue case "update":
- * processUpdate(parameters); break;
- * 
- * default: System.out.println("Invalid command input"); } }
- * 
- * public Command getCommand() { return command; }
- * 
- * private void processUpdate(String parameters){ int updateRow =
- * getUpdateRow(parameters); command.setUpdateRow(updateRow); parameters =
- * parameters.substring(parameters.indexOf(" ") + 1);
- * System.out.println(parameters.substring(0,parameters.indexOf(" "))); String
- * updateType = parameters.substring(0,parameters.indexOf(" "));
- * command.setUpdateType(updateType); parameters =
- * parameters.substring(parameters.indexOf(" ")); String updateDetail =
- * parameters.substring(parameters.indexOf(" ")+1);
- * command.setUpdateDetail(updateDetail); } private void processDelete(String
- * parameters){ int deleteRow = getDeleteRow(parameters);
- * command.setDeleteRow(deleteRow); } public void
- * createTaskWithParameters(String parameters){ Task task = new Task(); taskName
- * = getTaskName(parameters); task.setTask(taskName); location =
- * getLocation(parameters); task.setLocation(location); date =
- * getDate(parameters); task.setDate(date); start = getStart(parameters);
- * task.setStart(start); end = getEnd(parameters); task.setEnd(end); tag =
- * getTag(parameters); task.setTag(tag); notification =
- * getNotification(parameters); task.setNotification(notification);
- * command.setTask(task); }
- * 
- * 
- * 
- * // the following methods are used for testing
- * 
- * public String getTaskName(){ return taskName; } public String getLocation(){
- * return location; } public String getDate(){ return date; }
- * 
- * public String getStart(){ return start; } public String getEnd(){ return end;
- * } public String getTag(){ return tag; } public String getNotification(){
- * return notification; } public int getDeleteRow(){ return
- * command.getDeleteRow(); }
- * 
- * public int getUpdateRow(){ return command.getUpdateRow(); }
- * 
- * public String getUpdateType(){ return command.getUpdateType(); }
- * 
- * public String getUpdateDetail(){ return command.getUpdateDetail(); } }
- */
+	private Command command;
+	private String taskName = "";
+	private String location = "";
+	private String date = "";
+	private String start = "";
+	private String end = "";
+	private String tag = "";
+	private String notification = "";
+
+	public Parser(String cmd) {
+		command = new Command();
+		String commandType = cmd.substring(0, cmd.indexOf(" "));
+		String parameters = cmd.substring(cmd.indexOf(" ") + 1);
+		command.setCommandType(commandType);
+
+		switch (commandType) {
+
+		// add task @location on date from 1230~1300 #tag -notification
+		case "add":
+			createTaskWithParameters(parameters);
+			break;
+
+		// delete taskNumber
+		case "delete":
+			processDelete(parameters);
+			break;
+
+		// update taskNumber detailType newValue
+		case "update":
+			processUpdate(parameters);
+			break;
+
+		default:
+			System.out.println("Invalid command input");
+		}
+	}
+
+	public Command getCommand() {
+		return command;
+	}
+
+	private void processUpdate(String parameters) {
+		int updateRow = getUpdateRow(parameters);
+		command.setUpdateRow(updateRow);
+		parameters = parameters.substring(parameters.indexOf(" ") + 1);
+		System.out.println(parameters.substring(0, parameters.indexOf(" ")));
+		String updateType = parameters.substring(0, parameters.indexOf(" "));
+		command.setUpdateType(updateType);
+		parameters = parameters.substring(parameters.indexOf(" "));
+		String updateDetail = parameters.substring(parameters.indexOf(" ") + 1);
+		command.setUpdateDetail(updateDetail);
+	}
+
+	private void processDelete(String parameters) {
+		int deleteRow = getDeleteRow(parameters);
+		command.setDeleteRow(deleteRow);
+	}
+
+	public void
+
+	createTaskWithParameters(String parameters) {
+		Task task = new Task();
+		taskName = getTaskName(parameters);
+		task.setTask(taskName);
+		location = getLocation(parameters);
+		task.setLocation(location);
+		date = getDate(parameters);
+		task.setDate(date);
+		start = getStart(parameters);
+		task.setStart(start);
+		end = getEnd(parameters);
+		task.setEnd(end);
+		tag = getTag(parameters);
+		task.setTag(tag);
+		notification = getNotification(parameters);
+		task.setNotification(notification);
+		command.setTask(task);
+	}
+
+	public String getTaskName() {
+		return taskName;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public String getStart() {
+		return start;
+	}
+
+	public String getEnd() {
+		return end;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public String getNotification() {
+		return notification;
+	}
+
+	public int getDeleteRow() {
+		return command.getDeleteRow();
+	}
+
+	public int getUpdateRow() {
+		return command.getUpdateRow();
+	}
+
+	public String getUpdateType() {
+		return command.getUpdateType();
+	}
+
+	public String getUpdateDetail() {
+		return command.getUpdateDetail();
+	}
+}
+*/
