@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 csTutorial ~~OC ~~03 26 2016~~1100 ~~1200~~null~~null
 Psychology ~~Fass ~~03 31~~1400 ~~1500 ~~null~~null
 party ~~null~~05 05 2016~~0900 ~~1100~~null~~null
@@ -5,3 +6,7 @@ eat dinner ~~MBS ~~06 01 2016~~1800 ~~2000~~friends~~
 this ~~ ~~11 02 2016~~1200 ~~1300~~ ~~ 
 task ~~ ~~11 2 2014~~ ~~ ~~ ~~ 
 task~~ ~~~~ ~~ ~~ ~~ 
+=======
+church~~ ~~~~ ~~ ~~ ~~ 
+meeting~~ ~~~~ ~~ ~~ ~~ 
+>>>>>>> refs/remotes/JimCal/master
