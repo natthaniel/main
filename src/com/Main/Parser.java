@@ -100,29 +100,33 @@ public class Parser {
 				return new SearcherForFreeTimeSlot(searchFreeParameters, TaskList);
 			*/	
 			default: //by keyword
-				// String searchParameters = input.split(" ");
-				String searchParameters[] = new String[1];
-				searchParameters[0] = input;
+				String[] searchParameters = input.split(" ");
+				//String searchParameters[] = new String[1];
+				//searchParameters[0] = input;
 				return new SearcherByKeyword(searchParameters, TaskList);
 			}
 		
 		// display today/tomorrow/week/all/done/undone
-		/*
+/*		
 		 	case "display":
 			String[] displayParameters = new String[1];
 			displayParameters[0] = input;
 			return new Displayer(displayParameters, TaskList);
-		*/	
+*/			
 		// switch deadline/event/float
-		
-			/*
+/*		
 		case "switch":
 			String[] switchParameters = new String[1];
 			switchParameters[0] = input;
-			return new Switcher(switchParameters, TaskList);
-		*/	
-			
-			
+			return new Switcher(switchParameters, TaskList);	
+*/		
+		// do <taskNumber>
+/*
+		case "do":
+			String[] doParameters = new String[1];
+			doParameters[0] = getDoRow(input);
+			return Doer(doParameters, TaskList);
+*/
 		}
 		return null;
 	}
@@ -159,6 +163,11 @@ public class Parser {
 	public String getDeleteRow(String parameters) {
 		String deleteRow = parameters;
 		return deleteRow;
+	}
+	
+	public String getDoRow(String parameters){
+		String doRow = parameters;
+		return doRow;
 	}
 
 /*	public String getTaskName(String parameters) {
