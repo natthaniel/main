@@ -86,4 +86,10 @@ public class SearcherForFreeTimeSlot implements Commander {
 		return startTime + " to " + endTime + " is available on " + currentDate;
 	}
 
+	@Override
+	public String undo() {
+		String feedback = "Your last action is searching, which cannot be undone.";
+		return feedback;
+	}
+
 }

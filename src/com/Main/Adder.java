@@ -12,6 +12,7 @@ public class Adder implements Commander{
 		//The element of the string array will be in 
 		//0.taskName, 1.location 2.date 3.start 4.end 5.tag 6.notification
 		int taskListSize = TaskList.size();
+		this.TaskList = TaskList;
 		try {
 			newTask.setTask(parsedUserInput[0]);
 			newTask.setLocation(parsedUserInput[1]);
@@ -22,7 +23,7 @@ public class Adder implements Commander{
 			newTask.setNotification(parsedUserInput[6]);
 			newTask.setCalendar();
 			newTask.setTaskID(taskListSize+1);
-			this.TaskList = TaskList;
+			
 		} catch (NullPointerException e) {
 			
 			//e.printStackTrace();
@@ -36,6 +37,7 @@ public class Adder implements Commander{
 			return "Task not added successfully";
 		try {
 			TaskList.add(newTask);
+			Processor.setLastCommanderInst(this);
 			return "Task added successfully" ;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -43,6 +45,19 @@ public class Adder implements Commander{
 			//ProcessorLogger.log(Level.WARNING, "task not added successfully", e);
 		}	
 		
+	}
+
+	@Override
+	public String undo() {
+		ConverterToString taskConverter = new ConverterToString(newTask);
+		String feedback = taskConverter.convert();
+		
+		if(TaskList.remove(newTask)){
+			Processor.setLastCommanderInst(null);//Undoing add is designed for no chance of redoing.
+			return "The following task is removed:"+System.lineSeparator() + feedback;		
+		}
+		else
+			return "The undo to remove last task added is unsuccessful.";
 	}
 
 }

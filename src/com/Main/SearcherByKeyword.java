@@ -54,6 +54,12 @@ public class SearcherByKeyword implements Commander {
 		return output.convert();
 
 	}
+
+	@Override
+	public String undo() {
+		String feedback = "Your last action is searching, which cannot be undone.";
+		return feedback;
+	}
 }
 
 // old SearcherByKeyword code by zhiyun
