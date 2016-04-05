@@ -11,6 +11,7 @@ public class Adder implements Commander{
 	public Adder(String[] parsedUserInput, ArrayList<Task> TaskList) {
 		//The element of the string array will be in 
 		//0.taskName, 1.location 2.date 3.start 4.end 5.tag 6.notification
+		int taskListSize = TaskList.size();
 		try {
 			newTask.setTask(parsedUserInput[0]);
 			newTask.setLocation(parsedUserInput[1]);
@@ -20,6 +21,7 @@ public class Adder implements Commander{
 			newTask.setTag(parsedUserInput[5]);
 			newTask.setNotification(parsedUserInput[6]);
 			newTask.setCalendar();
+			newTask.setTaskID(taskListSize+1);
 			this.TaskList = TaskList;
 		} catch (NullPointerException e) {
 			

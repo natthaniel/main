@@ -22,8 +22,18 @@ public class Processor {
 		parserInst = new Parser();
 		storage = new TextFileSaver();
 		//Dispatcher.setTaskList(storage.getTaskData());
+		setUp();
+	}
+
+	/**
+	 * Set up the date attribute for every task in the list.
+	 * Set up the Task ID for every task in the list.
+	 */
+	private void setUp() {
 		for (int i = 0; i < storage.getTaskData().size(); i++ ){
-			storage.getTaskData().get(i).setCalendar();
+			ArrayList<Task> tasksArray = storage.getTaskData();
+			tasksArray.get(i).setCalendar();
+			tasksArray.get(i).setTaskID(i+1);//generation of TaskID, 1-based.
 		}
 	}
 	

@@ -69,6 +69,8 @@ public class Updater implements Commander{
 			taskToUpdate.setNotification(detailToUpdate);
 			TaskList.set(indexToUpdate, taskToUpdate);
 			break;
+		case "taskid":
+			return "TaskID should not be edited, please update other details.";
 		default:
 			return "Keyword for the type of detail is invalid.";
 		}
